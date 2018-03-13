@@ -3,34 +3,75 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.esprit.allforkids.entities;
+package edu.AllForKids.entities;
 
 /**
  *
  * @author Narjes
  */
-public class Produit {
+public class Produits {
     private int id;
     private String nom;
     private float prix;
     private int quantite;
     private String etat;
-    private boolean diponibilité;
+    private boolean disponible;
     private String categorie;
-
-    public Produit() {
+    public String image;
+      public Produits() {
     }
 
-    public Produit(int id, String nom, float prix, int quantite, String etat, boolean diponibilité, String categorie) {
+    public Produits(int id, float prix,String nom, int quantite, String image,String categorie, boolean disponible,String etat ) {
         this.id = id;
         this.nom = nom;
         this.prix = prix;
         this.quantite = quantite;
         this.etat = etat;
-        this.diponibilité = diponibilité;
+        this.disponible = disponible;
         this.categorie = categorie;
+        this.image = image;
     }
+
+   
     
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public float getPrix() {
+        return prix;
+    }
+
+    public int getQuantite() {
+        return quantite;
+    }
+
+    public String getEtat() {
+        return etat;
+    }
+
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public String getCategorie() {
+        return categorie;
+    }
+
+  
 
     public void setId(int id) {
         this.id = id;
@@ -52,8 +93,8 @@ public class Produit {
         this.etat = etat;
     }
 
-    public void setDiponibilité(boolean diponibilité) {
-        this.diponibilité = diponibilité;
+    public void setDiponibilité(boolean disponible) {
+        this.disponible= disponible;
     }
 
     public void setCategorie(String categorie) {
