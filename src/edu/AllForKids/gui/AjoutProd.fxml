@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="517.0" prefWidth="663.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.AllForKids.gui.AjoutProdController">
+   <children>
+      <Label layoutX="82.0" layoutY="57.0" text="Nom Produit" />
+      <Label layoutX="82.0" layoutY="108.0" text="Prix" />
+      <Button fx:id="bttajout" layoutX="170.0" layoutY="366.0" mnemonicParsing="false" onAction="#AjoutProduit" text="Ajouter" />
+      <Label layoutX="79.0" layoutY="167.0" text="Quantite" />
+      <Label layoutX="82.0" layoutY="233.0" />
+      <Label layoutX="76.0" layoutY="216.0" text="Image" />
+      <Button layoutX="288.0" layoutY="366.0" mnemonicParsing="false" text="Annuler" />
+      <TextField fx:id="txtproduit" layoutX="197.0" layoutY="53.0" />
+      <TextField fx:id="txtprix" layoutX="197.0" layoutY="104.0" />
+      <TextField fx:id="txtquantite" layoutX="197.0" layoutY="163.0" />
+      <CheckBox fx:id="txtdisponible" layoutX="92.0" layoutY="310.0" mnemonicParsing="false" text="Disponibilité" />
+      <Label layoutX="77.0" layoutY="260.0" text="Catégorie" />
+      <Button fx:id="imagebtt" layoutX="199.0" layoutY="212.0" mnemonicParsing="false" onAction="#ImageChoose" prefHeight="25.0" prefWidth="149.0" text="Parcourir" />
+      <ComboBox fx:id="txtcategorie" layoutX="199.0" layoutY="256.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>
