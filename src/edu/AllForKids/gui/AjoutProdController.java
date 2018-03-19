@@ -8,6 +8,10 @@ package edu.AllForKids.gui;
 import edu.AllForKids.entities.Produits;
 import edu.AllForKids.services.CrudStore;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -38,6 +42,7 @@ public class AjoutProdController implements Initializable {
      File pfile;
      int file=0;
      String path;
+       File pDir;
 
     @FXML
     private Button bttajout;
@@ -53,6 +58,8 @@ public class AjoutProdController implements Initializable {
     private ComboBox<String> txtcategorie;
     @FXML
     private Button imagebtt;
+     int c;
+     String lien;
 
     /**
      * Initializes the controller class.
@@ -62,6 +69,9 @@ public class AjoutProdController implements Initializable {
          ObservableList<String> categories=FXCollections.observableArrayList("Vétements","Jouets");
          txtcategorie.setItems(categories);
          txtcategorie.setValue("Vétements");
+          c = (int) (Math.random() * (300000 - 2 + 1)) + 2;
+         pDir = new File("src/Media/" + c + ".jpg");
+          lien= "Media/" + c + ".jpg";
          
         // TODO
     }    
@@ -78,7 +88,8 @@ public class AjoutProdController implements Initializable {
         p.setCategorie(txtcategorie.getValue());
         p.setEtat("En attente");
         p.setDiponibilité(txtdisponible.isSelected());
-        p.setImage(path);
+        copier(pfile, pDir);
+        p.setImage(lien);
         myTool.insererProduit(p);
         JOptionPane.showMessageDialog(null,"Produit ajouté");
         
@@ -92,11 +103,11 @@ public class AjoutProdController implements Initializable {
          new FileChooser.ExtensionFilter("JPG", "*.jpg"),
          new FileChooser.ExtensionFilter("PNG", "*.png")
          );
-         File selectedFile=fc.showOpenDialog(null);
-         if(selectedFile!=null)
+         pfile=fc.showOpenDialog(null);
+         if(pfile!=null)
          {
-              String p=selectedFile.getPath();
-              path=selectedFile.getAbsolutePath();
+              String p=pfile.getPath();
+              path=pfile.getAbsolutePath();
               
               
              
@@ -104,5 +115,19 @@ public class AjoutProdController implements Initializable {
     
         
     }
-    
+    public static boolean copier(File source, File dest) { 
+    try (InputStream sourceFile = new java.io.FileInputStream(source);  
+            OutputStream destinationFile = new FileOutputStream(dest)) { 
+        // Lecture par segment de 0.5Mo  
+        byte buffer[] = new byte[512 * 1024]; 
+        int nbLecture; 
+        while ((nbLecture = sourceFile.read(buffer)) != -1){ 
+            destinationFile.write(buffer, 0, nbLecture); 
+        } 
+    } catch (IOException e){ 
+        e.printStackTrace(); 
+        return false; // Erreur 
+    } 
+    return true; // Résultat OK   
+}
 }
