@@ -15,7 +15,7 @@
       <Label layoutX="79.0" layoutY="167.0" text="Quantite" />
       <Label layoutX="82.0" layoutY="233.0" />
       <Label layoutX="76.0" layoutY="216.0" text="Image" />
-      <Button layoutX="288.0" layoutY="366.0" mnemonicParsing="false" text="Annuler" />
+      <Button fx:id="bttAnnuler" layoutX="288.0" layoutY="366.0" mnemonicParsing="false" onAction="#Annuler" text="Annuler" />
       <TextField fx:id="txtproduit" layoutX="197.0" layoutY="53.0" />
       <TextField fx:id="txtprix" layoutX="197.0" layoutY="104.0" />
       <TextField fx:id="txtquantite" layoutX="197.0" layoutY="163.0" />
