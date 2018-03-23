@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="493.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.AllForKids.gui.ModifierprodController">
+   <children>
+      <Label layoutX="87.0" layoutY="52.0" text="ID" />
+      <Label layoutX="86.0" layoutY="100.0" text="Nom du Produit" />
+      <Label layoutX="82.0" layoutY="138.0" text="Prix" />
+      <Label layoutX="84.0" layoutY="200.0" text="Quantite" />
+      <Label layoutX="84.0" layoutY="292.0" text="Categorie" />
+      <Label layoutX="91.0" layoutY="347.0" text="Disponibilité" />
+      <Label layoutX="92.0" layoutY="397.0" text="Etat" />
+      <TextField fx:id="txtid" disable="true" layoutX="203.0" layoutY="48.0" />
+      <TextField fx:id="txtnom" layoutX="203.0" layoutY="96.0" />
+      <TextField fx:id="txtprix" layoutX="203.0" layoutY="143.0" />
+      <TextField fx:id="txtquantite" layoutX="203.0" layoutY="196.0" />
+      <TextField fx:id="txtdispo" layoutX="203.0" layoutY="343.0" />
+      <TextField fx:id="txtetat" disable="true" layoutX="203.0" layoutY="393.0" />
+      <Label layoutX="91.0" layoutY="247.0" text="Image" />
+      <TextField fx:id="txtcategorie" layoutX="203.0" layoutY="297.0" />
+      <TextField fx:id="txtimage" layoutX="203.0" layoutY="252.0" />
+      <Button fx:id="ModifierAction" layoutX="174.0" layoutY="446.0" mnemonicParsing="false" onAction="#Modifer" text="Modifer" />
+      <Button layoutX="287.0" layoutY="446.0" mnemonicParsing="false" text="Annnuler" />
+   </children>
+</AnchorPane>

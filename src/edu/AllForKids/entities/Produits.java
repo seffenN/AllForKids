@@ -19,10 +19,22 @@ public class Produits {
     private String categorie;
     public String image;
       public Produits() {
-    }
-
+      
+      }
+    
     public Produits(int id, float prix,String nom, int quantite, String image,String categorie, boolean disponible,String etat ) {
         this.id = id;
+        this.nom = nom;
+        this.prix = prix;
+        this.quantite = quantite;
+        this.etat = etat;
+        this.disponible = disponible;
+        this.categorie = categorie;
+        this.image = image;
+    }
+    
+     public Produits( float prix,String nom, int quantite, String image,String categorie, boolean disponible,String etat ) {
+        
         this.nom = nom;
         this.prix = prix;
         this.quantite = quantite;

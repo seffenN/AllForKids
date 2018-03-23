@@ -17,11 +17,16 @@ import java.sql.SQLException;
  * @author Seif BelHadjAli
  */
 public class MyMain {
-    public static void main(String[] args) throws SQLException {
-        Produits p=new Produits(1,88F,"Robe",50,"image","vetements",true,"en attente");
-       // CrudStore.insererProduit(p);
-        CrudStore.selectProduit();
+    public static void main(String[] args) throws SQLException, Exception {
+        Produits p=new Produits(1,88F,"Robe",8,"image","vetements",true,"en attente");
         
+         Produits p2=new Produits(88F,"AMINE",100,"image","vetements",false,"en attente");
+         //CrudStore.insererProduit(p2);
+      CrudStore c=new CrudStore();
+      c.ModifierProduit(p2);
+       
+        //mafhemteh aleh loula maykrahesh
+        //trah ab3athli entité w methode bizarre taw njarabha 3andi
         
         
         
