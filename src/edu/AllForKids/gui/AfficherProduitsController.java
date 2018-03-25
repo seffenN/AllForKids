@@ -14,6 +14,7 @@ import static java.lang.String.valueOf;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,7 +29,10 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableCell;
@@ -73,6 +77,10 @@ public class AfficherProduitsController implements Initializable {
     @FXML
     private Button bttModifer;
     List<Produits> arrayList;
+    @FXML
+    private Button bttajout;
+    @FXML
+    private Button bttsupp;
     
 
     /**
@@ -101,13 +109,58 @@ public class AfficherProduitsController implements Initializable {
             {
             ((Node)event.getSource()).getScene().getWindow().hide();
             p=table.getItems().get(table.getSelectionModel().getSelectedIndex());
-            id.setText(String.valueOf(p.getId()));
-            
+            //id.setText(String.valueOf(p.getId()));
             Stage stage=new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("ModifierProd.fxml"));
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show(); 
+            }
+            else 
+            {
+                 JOptionPane.showMessageDialog(null,"Veuillez selectionner un produit");
+            }
+    }
+
+    @FXML
+    private void AjouterProduits(ActionEvent event) throws IOException {
+         ((Node)event.getSource()).getScene().getWindow().hide();
+            Stage stage=new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("AjoutProd.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show(); 
+    }
+
+    @FXML
+    private void supprimerProduit(ActionEvent event) throws IOException {
+         if (table.getSelectionModel().getSelectedItem()!=null)
+            {
+           
+            //id.setText(String.valueOf(p.getId()));
+           Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation suppression");
+        alert.setHeaderText("Look, a Confirmation Dialog");
+        alert.setContentText("Are you ok with this?");
+        
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){ 
+             ((Node)event.getSource()).getScene().getWindow().hide();
+            p=table.getItems().get(table.getSelectionModel().getSelectedIndex());
+            produitService.DeleteProduit(p);
+            Alert alert1 = new Alert(AlertType.INFORMATION);
+           alert1.setTitle("I have a great message for you!");
+           alert1.setHeaderText(null);
+           alert1.setContentText("Suppression Réussite réussite !");
+           alert1.showAndWait();
+           Stage stage=new Stage();
+      Parent root = FXMLLoader.load(getClass().getResource("AfficherProduits.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }else{
+             ((Node)event.getSource()).getScene().getWindow().hide();
+        }
             }
             else 
             {

@@ -7,7 +7,13 @@ package edu.AllForKids.gui;
 
 import com.sun.xml.internal.txw2.TxwException;
 import edu.AllForKids.entities.Produits;
+import static edu.AllForKids.gui.AjoutProdController.copier;
 import edu.AllForKids.services.CrudStore;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -23,6 +29,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 /**
@@ -50,12 +57,23 @@ public class ModifierprodController implements Initializable {
     private TextField txtimage;
     @FXML
     private Button ModifierAction;
+    int c;
+    String lien;
+    File pfile;
+     int file=0;
+     String path;
+       File pDir;
+    @FXML
+    private Button bttimage;
     //int c = Integer.valueOf(AfficherProduitsController.p.getId());
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        c = (int) (Math.random() * (300000 - 2 + 1)) + 2;
+         pDir = new File("src/Media/" + c + ".jpg");
+          lien= "Media/" + c + ".jpg";
      
         txtid.setText(String.valueOf(AfficherProduitsController.p.getId()));
         txtnom.setText(AfficherProduitsController.p.getNom());
@@ -96,11 +114,11 @@ public class ModifierprodController implements Initializable {
         float prix=Float.parseFloat(txtprix.getText());
         int quantite=Integer.parseInt(txtquantite.getText());
         p.setQuantite(quantite);
-        p.setImage(txtimage.getText());
+        copier(pfile, pDir);
+        p.setImage(lien);
         p.setEtat(txtetat.getText());
         p.setPrix(prix);
         p.setCategorie(txtcategorie.getText());
-        
         p.setDiponibilité(txtdispo.isEditable());
         myTool.ModifierProduit(p);
          Alert alert1 = new Alert(AlertType.INFORMATION);
@@ -122,6 +140,51 @@ public class ModifierprodController implements Initializable {
             
            }
 
+    }
+
+    @FXML
+    private void Choose(ActionEvent event) {
+         FileChooser fc = new FileChooser();
+         fc.setTitle("Open Resource File");
+         fc.getExtensionFilters().addAll(
+         new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+         new FileChooser.ExtensionFilter("PNG", "*.png")
+         );
+         pfile=fc.showOpenDialog(null);
+         if(pfile!=null)
+         {
+              String p=pfile.getPath();
+              path=pfile.getAbsolutePath();
+              
+              
+             
+         }
+    }
+     public static boolean copier(File source, File dest) { 
+    try (InputStream sourceFile = new java.io.FileInputStream(source);  
+            OutputStream destinationFile = new FileOutputStream(dest)) { 
+        // Lecture par segment de 0.5Mo  
+        byte buffer[] = new byte[512 * 1024]; 
+        int nbLecture; 
+        while ((nbLecture = sourceFile.read(buffer)) != -1){ 
+            destinationFile.write(buffer, 0, nbLecture); 
+        } 
+    } catch (IOException e){ 
+        e.printStackTrace(); 
+        return false; // Erreur 
+    } 
+    return true; // Résultat OK   
+}
+
+    @FXML
+    private void Annuler(ActionEvent event) throws IOException {
+         ((Node)event.getSource()).getScene().getWindow().hide();
+            Stage stage=new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("ModifierProd.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+      
     }
 
     

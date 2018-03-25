@@ -22,8 +22,9 @@
       <TextField fx:id="txtetat" disable="true" layoutX="203.0" layoutY="393.0" />
       <Label layoutX="91.0" layoutY="247.0" text="Image" />
       <TextField fx:id="txtcategorie" layoutX="203.0" layoutY="297.0" />
-      <TextField fx:id="txtimage" layoutX="203.0" layoutY="252.0" />
       <Button fx:id="ModifierAction" layoutX="174.0" layoutY="446.0" mnemonicParsing="false" onAction="#Modifer" text="Modifer" />
-      <Button layoutX="287.0" layoutY="446.0" mnemonicParsing="false" text="Annnuler" />
+      <Button layoutX="287.0" layoutY="446.0" mnemonicParsing="false" onAction="#Annuler" text="Annnuler" />
+      <Button fx:id="bttimage" layoutX="367.0" layoutY="243.0" mnemonicParsing="false" onAction="#Choose" prefHeight="25.0" prefWidth="142.0" text="Parcourir" />
+      <TextField fx:id="txtimage" layoutX="203.0" layoutY="243.0" />
    </children>
 </AnchorPane>

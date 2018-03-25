@@ -23,5 +23,6 @@
       <Label layoutX="77.0" layoutY="260.0" text="Catégorie" />
       <Button fx:id="imagebtt" layoutX="199.0" layoutY="212.0" mnemonicParsing="false" onAction="#ImageChoose" prefHeight="25.0" prefWidth="149.0" text="Parcourir" />
       <ComboBox fx:id="txtcategorie" layoutX="199.0" layoutY="256.0" prefWidth="150.0" />
+      <Label fx:id="label_erreur" layoutX="50.0" layoutY="439.0" prefHeight="25.0" prefWidth="496.0" />
    </children>
 </AnchorPane>

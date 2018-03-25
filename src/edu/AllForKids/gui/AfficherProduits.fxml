@@ -19,6 +19,8 @@
             <TableColumn fx:id="Etat" prefWidth="113.0" text="Etat" />
         </columns>
       </TableView>
-      <Button fx:id="bttModifer" layoutX="14.0" layoutY="43.0" mnemonicParsing="false" onAction="#ModifierProduit" text="Modifier" />
+      <Button fx:id="bttModifer" layoutX="79.0" layoutY="43.0" mnemonicParsing="false" onAction="#ModifierProduit" text="Modifier" />
+      <Button fx:id="bttajout" layoutX="14.0" layoutY="43.0" mnemonicParsing="false" onAction="#AjouterProduits" text="Ajouter" />
+      <Button fx:id="bttsupp" layoutX="151.0" layoutY="43.0" mnemonicParsing="false" onAction="#supprimerProduit" text="Supprimer" />
    </children>
 </AnchorPane>

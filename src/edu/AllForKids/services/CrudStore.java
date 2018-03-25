@@ -68,12 +68,12 @@ public class CrudStore {
               return produits;
     }
             
-public  void DeleteProduit(int id){
+public  void DeleteProduit(Produits p){
        
         try {
             String req= "DELETE FROM `produits`  WHERE id=? ";
             PreparedStatement ste = con.prepareStatement(req);
-            ste.setInt(1, id);
+            ste.setInt(1, p.getId());
             ste.executeUpdate();
             
         } catch (SQLException ex) {
