@@ -25,6 +25,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
@@ -86,7 +87,7 @@ public class AjoutProdController implements Initializable {
     }
 
     @FXML
-    private void AjoutProduit(ActionEvent event) throws SQLException {
+    private void AjoutProduit(ActionEvent event) throws SQLException, IOException {
         int quantite = Integer.parseInt(txtquantite.getText());
         String nom =txtproduit.getText();
         label_erreur.setText("");
@@ -112,7 +113,14 @@ public class AjoutProdController implements Initializable {
                     copier(pfile, pDir);
                     p.setImage(lien);
                     myTool.insererProduit(p);
-                    JOptionPane.showMessageDialog(null, "Produit ajouté");
+                      Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+                           alert1.setContentText("Produit Ajouté !");
+                     alert1.showAndWait();
+                     Stage stage=new Stage();
+                   Parent root = FXMLLoader.load(getClass().getResource("AfficherProduits.fxml"));
+                 Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
 
                 }
        

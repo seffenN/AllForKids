@@ -17,6 +17,8 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +30,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -48,11 +53,11 @@ public class ModifierprodController implements Initializable {
     @FXML
     private TextField txtprix;
     @FXML
-    private TextField txtdispo;
+    private CheckBox txtdispo;
     @FXML
     private TextField txtetat;
     @FXML
-    private TextField txtcategorie;
+    private ComboBox<String> txtcategorie;
     @FXML
     private TextField txtimage;
     @FXML
@@ -65,12 +70,17 @@ public class ModifierprodController implements Initializable {
        File pDir;
     @FXML
     private Button bttimage;
+    @FXML
+    private Label label_erreur;
     //int c = Integer.valueOf(AfficherProduitsController.p.getId());
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        ObservableList<String> categories = FXCollections.observableArrayList("Vétements", "Jouets");
+        txtcategorie.setItems(categories);
+       // txtcategorie.setValue("Vétements");
         c = (int) (Math.random() * (300000 - 2 + 1)) + 2;
          pDir = new File("src/Media/" + c + ".jpg");
           lien= "Media/" + c + ".jpg";
@@ -82,7 +92,7 @@ public class ModifierprodController implements Initializable {
         String quantite=""+AfficherProduitsController.p.getQuantite();
        txtquantite.setText(quantite);
         txtimage.setText(AfficherProduitsController.p.getImage());
-        txtcategorie.setText(AfficherProduitsController.p.getCategorie());
+        txtcategorie.setValue(AfficherProduitsController.p.getCategorie());
        String dispo=""+AfficherProduitsController.p.isDisponible();
         txtdispo.setText(dispo);
        
@@ -105,21 +115,30 @@ public class ModifierprodController implements Initializable {
         if (result.get() == ButtonType.OK){
             Stage stage=new Stage();
              CrudStore myTool=new CrudStore();
-             
+              int quantite = Integer.parseInt(txtquantite.getText());
+        String nom =txtnom.getText();
+        label_erreur.setText("");
+        if ((txtnom.getText().equals("")) && (txtprix.getText().compareTo("") == 0) && (txtquantite.getText().compareTo("") == 0)) {
+            label_erreur.setText("un ou plusieurs champs sont vides");
+
+            } else 
+
+                if (quantite <0) {
+                    label_erreur.setText("nega");
+                } else {
           
         Produits p=new Produits();
         int id=Integer.parseInt(txtid.getText());
        p.setId(id);
         p.setNom(txtnom.getText());
         float prix=Float.parseFloat(txtprix.getText());
-        int quantite=Integer.parseInt(txtquantite.getText());
         p.setQuantite(quantite);
         copier(pfile, pDir);
         p.setImage(lien);
         p.setEtat(txtetat.getText());
         p.setPrix(prix);
-        p.setCategorie(txtcategorie.getText());
-        p.setDiponibilité(txtdispo.isEditable());
+        p.setCategorie(txtcategorie.getValue());
+        p.setDiponibilité(txtdispo.isSelected());
         myTool.ModifierProduit(p);
          Alert alert1 = new Alert(AlertType.INFORMATION);
            alert1.setTitle("I have a great message for you!");
@@ -130,6 +149,7 @@ public class ModifierprodController implements Initializable {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
+                }
         
     }else {
             Stage stage=new Stage();
