@@ -102,9 +102,7 @@ public class AjoutProdController implements Initializable {
                     CrudStore myTool = new CrudStore();
                     Produits p = new Produits();
                     p.setNom(txtproduit.getText());
-
                     float prix = Float.parseFloat(txtprix.getText());
-
                     p.setQuantite(quantite);
                     p.setPrix(prix);
                     p.setCategorie(txtcategorie.getValue());

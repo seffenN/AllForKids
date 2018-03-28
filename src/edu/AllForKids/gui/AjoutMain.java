@@ -31,7 +31,7 @@ public class AjoutMain extends Application {
         try {
               //root = FXMLLoader.load(getClass().getResource("AjoutProd.fxml"));
               //root = FXMLLoader.load(getClass().getResource("AfficherProduits.fxml"));
-               root = FXMLLoader.load(getClass().getResource("ListeProduits.fxml"));
+               root = FXMLLoader.load(getClass().getResource("ListeProduits2.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
