@@ -12,8 +12,18 @@ package edu.AllForKids.entities;
 public class User {
     int id_user;
     String nom;
-    String prenom;
-    int role;
+    String Email;
+    String sexe;
+    String mdp;
+
+    public String getMdp() {
+        return mdp;
+    }
+
+    public void setMdp(String mdp) {
+        this.mdp = mdp;
+    }
+    String role;
 
     public int getId_user() {
         return id_user;
@@ -31,20 +41,33 @@ public class User {
         this.nom = nom;
     }
 
-    public String getPrenom() {
-        return prenom;
+    public String getEmail() {
+        return Email;
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    public void setEmail(String Email) {
+        this.Email = Email;
     }
 
-    public int getRole() {
+    public String getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
+    }
+
+    public String getRole() {
         return role;
     }
 
-    public void setRole(int role) {
+    public void setRole(String role) {
         this.role = role;
     }
+
+   
+    
+
+   
     
 }
