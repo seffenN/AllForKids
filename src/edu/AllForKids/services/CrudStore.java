@@ -126,7 +126,7 @@ public  void DeleteProduit(Produits p){
            p.setNom(rs.getString("Nom"));
             p.setQuantite(rs.getInt("Quantite"));
             p.setImage(rs.getString("image"));           
-           p.setCategorie(rs.getString("categories"));
+           p.setCategorie(rs.getString("Categorie"));
            p.setDiponibilité(rs.getBoolean("Disponible"));
            p.setEtat(rs.getString("etat"));
 

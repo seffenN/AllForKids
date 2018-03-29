@@ -17,5 +17,6 @@
       </TableView>
       <ImageView fx:id="image" fitHeight="150.0" fitWidth="200.0" layoutX="414.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true" />
       <Button layoutX="246.0" layoutY="420.0" mnemonicParsing="false" onAction="#AjoutPanier" text="AjouterAuPanier" />
+      <Button fx:id="pann" layoutX="125.0" layoutY="420.0" mnemonicParsing="false" onAction="#consulter" text="Consulter panier" />
    </children>
 </AnchorPane>

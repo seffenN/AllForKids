@@ -9,6 +9,7 @@ package edu.AllForKids.gui;
 import edu.AllForKids.entities.Produits;
 import static edu.AllForKids.gui.AfficherProduitsController.p;
 import edu.AllForKids.services.CrudStore;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,12 +18,18 @@ import java.util.Enumeration;
 import java.util.List;
 
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 
 import javafx.scene.control.TableView;
@@ -30,6 +37,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 
 /**
@@ -53,6 +62,8 @@ public class ListeProduits2Controller implements Initializable {
       CrudStore produitService=new CrudStore();
     public static Produits p;
       public static List<ArrayList> panier=new ArrayList<>();
+    @FXML
+    private Button pann;
     /**
      * Initializes the controller class.
      */
@@ -100,11 +111,19 @@ public class ListeProduits2Controller implements Initializable {
                    
                 
                  
-            }
-         for(int i=0;i<panier.size();i++){
-             System.out.println(panier.get(i));
+            
+        
          }
          }
+
+    @FXML
+    private void consulter(ActionEvent event) throws IOException {
+        Stage stage=new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("Panier.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show(); 
+    }
         
            
          }
