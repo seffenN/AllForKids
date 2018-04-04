@@ -9,7 +9,11 @@ import edu.AllForKids.entities.User;
 import edu.AllForKids.utils.MyConnexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -43,5 +47,21 @@ Connection con;
         }
 
     }
-    
+     public User Verif_Connexion(String email, String motpasse) {
+        User u =null;
+        try {
+            System.out.println("Recupération...");
+            Statement stm =con.createStatement();
+            String sql="select * from user where email='"+email+"'AND password='"+motpasse+"'" ;
+            ResultSet rs = stm.executeQuery(sql);
+            while (rs.next()) {
+           u= new User(rs.getString("email"),rs.getString("password"));
+            System.out.println("Recuperation avec succes");  
+            }
+        }
+           
+           //stm.executeQuery(sql);
+         catch (SQLException ex) {
+        }
+        return u;      }
 }

@@ -7,6 +7,8 @@ package edu.AllForKids.gui;
 
 import edu.AllForKids.entities.User;
 import edu.AllForKids.services.CrudUser;
+import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -19,8 +21,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 
 /**
  * FXML Controller class
@@ -57,6 +62,9 @@ public class RegisterController implements Initializable {
     private Button Choose;
     @FXML
     private ComboBox<String> role;
+     int file = 0;
+    File pDir;
+    File pfile;
 
     /**
      * Initializes the controller class.
@@ -80,6 +88,7 @@ public class RegisterController implements Initializable {
         u.setNom(Nom.getText());
         u.setEmail(Email.getText());
         u.setMdp(Pass.getText());
+        u.setEnabled(1);
         u.setRole(role.getValue());
         if(homme.isSelected()){
             u.setSexe(homme.getText());
@@ -93,10 +102,33 @@ public class RegisterController implements Initializable {
 
     @FXML
     private void Reset(ActionEvent event) {
+         femme.setSelected(false);
+        homme.setSelected(true);
+        tfmail.clear();
+        tfpass.clear();
+        Nom.clear();
+        //RepeterPass.clear();
     }
 
     @FXML
-    private void Choisir(ActionEvent event) {
+    private void Choisir(ActionEvent event) throws MalformedURLException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select image..");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG", "*.png"),
+                new FileChooser.ExtensionFilter("BMP", "*.bmp")
+        );
+        Window stage = null;
+        pfile = fileChooser.showOpenDialog(stage);
+
+        /* - draw image */
+        if (pfile != null) {
+            //ch.setText("image sélectionnée");
+            file = 1;
+            Image image = new Image(pfile.toURI().toURL().toExternalForm());
+            img.setImage(image);
+        }
     }
     
 }

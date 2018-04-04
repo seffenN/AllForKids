@@ -7,12 +7,12 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.AllForKids.gui.PanierController">
    <children>
-      <TableView fx:id="table" layoutX="66.0" layoutY="53.0" prefHeight="220.0" prefWidth="316.0">
+      <TableView fx:id="table" layoutX="66.0" layoutY="58.0" prefHeight="223.0" prefWidth="397.0">
         <columns>
           <TableColumn fx:id="nomprod" prefWidth="98.0" text="Nom Produit" />
-          <TableColumn fx:id="prix" prefWidth="62.0" text="Prix" />
-            <TableColumn fx:id="type" prefWidth="72.0" text="Type" />
-            <TableColumn fx:id="quantite" editable="true" prefWidth="83.0" text="Quantite" />
+          <TableColumn fx:id="prix" prefWidth="91.0" text="Prix" />
+            <TableColumn fx:id="type" prefWidth="78.0" text="Type" />
+            <TableColumn fx:id="quantite" editable="true" prefWidth="128.0" text="Stock Disponible" />
         </columns>
       </TableView>
       <Button fx:id="commander" layoutX="287.0" layoutY="296.0" mnemonicParsing="false" onAction="#commander" text="Commander" />

@@ -15,10 +15,37 @@ public class User {
     String Email;
     String sexe;
     String mdp;
+      int enabled;
+
+    public User( String Email,  String mdp) {
+       
+        this.Email = Email;
+       
+        this.mdp = mdp;
+       
+    }
+
+    public User() {
+    }
+    
+
+  
+
+    
+     
 
     public String getMdp() {
         return mdp;
     }
+
+    public int getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(int enabled) {
+        this.enabled = enabled;
+    }
+    
 
     public void setMdp(String mdp) {
         this.mdp = mdp;

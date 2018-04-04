@@ -87,6 +87,15 @@ public class CrudCommande {
 			e.printStackTrace();
 		}
     }
-    
+       public void DecrementerStock(int id,int nbrArticle) throws SQLException
+       {
+         String req= "UPDATE produits SET Quantite=Quantite-? WHERE id="+id;
+
+            PreparedStatement preparedStmt = con.prepareStatement(req);
+            preparedStmt.setInt(1, nbrArticle);
+              preparedStmt.executeUpdate();
+           
+       }
+       
     
 }

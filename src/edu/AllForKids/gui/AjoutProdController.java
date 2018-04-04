@@ -16,6 +16,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.UUID;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -49,6 +50,7 @@ public class AjoutProdController implements Initializable {
     int file = 0;
     String path;
     File pDir;
+    private FileChooser fileChooser = new FileChooser();
 
     @FXML
     private Button bttajout;
@@ -70,6 +72,8 @@ public class AjoutProdController implements Initializable {
     private Button bttAnnuler;
     @FXML
     private Label label_erreur;
+    String path1 = "";
+    final Stage stage = new Stage();
 
     /**
      * Initializes the controller class.
@@ -79,9 +83,9 @@ public class AjoutProdController implements Initializable {
         ObservableList<String> categories = FXCollections.observableArrayList("Vétements", "Jouets");
         txtcategorie.setItems(categories);
         txtcategorie.setValue("Vétements");
-        c = (int) (Math.random() * (300000 - 2 + 1)) + 2;
+      /*  c = (int) (Math.random() * (300000 - 2 + 1)) + 2;
         pDir = new File("src/Media/" + c + ".jpg");
-        lien = "Media/" + c + ".jpg";
+        lien = "Media/" + c + ".jpg";*/
 
         // TODO
     }
@@ -89,47 +93,42 @@ public class AjoutProdController implements Initializable {
     @FXML
     private void AjoutProduit(ActionEvent event) throws SQLException, IOException {
         int quantite = Integer.parseInt(txtquantite.getText());
-        String nom =txtproduit.getText();
+        String nom = txtproduit.getText();
         label_erreur.setText("");
         if ((txtproduit.getText().equals("")) && (txtprix.getText().compareTo("") == 0) && (txtquantite.getText().compareTo("") == 0)) {
             label_erreur.setText("un ou plusieurs champs sont vides");
 
-            } else 
-
-                if (quantite <0) {
-                    label_erreur.setText("nega");
-                } else {
-                    CrudStore myTool = new CrudStore();
-                    Produits p = new Produits();
-                    p.setNom(txtproduit.getText());
-                    float prix = Float.parseFloat(txtprix.getText());
-                    p.setQuantite(quantite);
-                    p.setPrix(prix);
-                    p.setCategorie(txtcategorie.getValue());
-                    p.setEtat("En attente");
-                    p.setDiponibilité(txtdisponible.isSelected());
-                    copier(pfile, pDir);
-                    p.setImage(lien);
-                    myTool.insererProduit(p);
-                      Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-                           alert1.setContentText("Produit Ajouté !");
-                     alert1.showAndWait();
-                     Stage stage=new Stage();
-                   Parent root = FXMLLoader.load(getClass().getResource("AfficherProduits.fxml"));
-                 Scene scene = new Scene(root);
+        } else if (quantite < 0) {
+            label_erreur.setText("nega");
+        } else {
+            CrudStore myTool = new CrudStore();
+            Produits p = new Produits();
+            p.setNom(txtproduit.getText());
+            float prix = Float.parseFloat(txtprix.getText());
+            p.setQuantite(quantite);
+            p.setPrix(prix);
+            p.setCategorie(txtcategorie.getValue());
+            p.setEtat("En attente");
+            p.setDiponibilité(txtdisponible.isSelected());
+            //copier(pfile, pDir);
+            p.setImage(path1);
+            myTool.insererProduit(p);
+            Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+            alert1.setContentText("Produit Ajouté !");
+            alert1.showAndWait();
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("AfficherProduits.fxml"));
+            Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
 
-                }
-       
-                
-        
+        }
+
     }
 
-        @FXML
-        private void ImageChoose
-        (ActionEvent event) throws MalformedURLException {
-            FileChooser fc = new FileChooser();
+    @FXML
+    private void ImageChoose(ActionEvent event) throws MalformedURLException {
+        /* FileChooser fc = new FileChooser();
             fc.setTitle("Open Resource File");
             fc.getExtensionFilters().addAll(
                     new FileChooser.ExtensionFilter("JPG", "*.jpg"),
@@ -140,10 +139,34 @@ public class AjoutProdController implements Initializable {
                 //String p = pfile.getPath();
                  pfile.getAbsolutePath();
 
-            }
+            }*/
+        File file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+            if (file.getName().contains(".jpg")) {
+                System.out.println("khtart fichier");
 
+                System.out.println(UUID.randomUUID().toString().concat(".jpg"));
+
+                String uuid = UUID.randomUUID().toString().concat(".jpg");
+
+                path1 = file.getAbsolutePath();
+                System.out.println(path1);
+                //String pathxx1 = file.toURI().toURL().toString();
+
+                //Image image = new Image(pathxx1);
+                File file1 = new File(path1);
+
+                // Image image1 = new Image(file1.toURI().toString());
+                //imagebtt.setImage(image1);
+                File source = new File(path1);
+
+                File dest = new File("C:\\wamp64\\www\\PI4\\web\\bundles\\images\\" + uuid);
+                path1=uuid;
+                copier(source, dest);
+
+            }
         }
-    
+    }
 
     public static boolean copier(File source, File dest) {
         try (InputStream sourceFile = new java.io.FileInputStream(source);

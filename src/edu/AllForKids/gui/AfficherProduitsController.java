@@ -72,7 +72,7 @@ public class AfficherProduitsController implements Initializable {
     @FXML
     private TableColumn<Produits, String> cat;
     CrudStore produitService=new CrudStore();
-    public static Produits p=new Produits();
+    public static Produits p=null;
     
     @FXML
     private Button bttModifer;

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="671.0" prefWidth="985.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.AllForKids.gui.AccueilBackEndController">
+   <children>
+      <AnchorPane prefHeight="92.0" prefWidth="985.0" style="-fx-background-color: #2471A3;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="801.0" layoutY="20.0" prefHeight="28.0" prefWidth="70.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="20.0" />
+            <HBox alignment="CENTER" layoutX="9.0" spacing="8.0" style="-fx-background-color: #81CFE0;" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="1.0">
+               <children>
+                  <VBox alignment="CENTER_LEFT" fillWidth="false" prefHeight="90.0" prefWidth="177.0" style="-fx-background-color: #81CFE0;">
+                     <children>
+                        <ImageView fitHeight="51.0" fitWidth="162.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/logo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <Separator orientation="VERTICAL" prefHeight="200.0" styleClass="back" />
+                  <VBox alignment="CENTER" prefHeight="90.0" prefWidth="555.0" spacing="4.0" style="-fx-background-color: #52B3D9;" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label prefHeight="3.0" prefWidth="206.0" text="Espace Administratif" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                           <textFill>
+                              <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                                 <stops>
+                                    <Stop color="#f5f2f2" />
+                                    <Stop color="WHITE" offset="1.0" />
+                                 </stops>
+                              </RadialGradient>
+                           </textFill>
+                        </Label>
+                        <Separator prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                        <HBox prefHeight="25.0" prefWidth="420.0" spacing="6.0" VBox.vgrow="NEVER">
+                           <children>
+                              <Button onAction="#GetGestionUser" prefHeight="150.0" prefWidth="170.0" style="-fx-background-color: #FAFAFA;" text="Utilisateur">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font></Button>
+                              <Button onAction="#GetGestionStore" prefHeight="150.0" prefWidth="170.0" style="-fx-background-color: #FAFAFA;" text="Store">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font></Button>
+                              <Button onAction="#GetGestionEvenement" prefHeight="150.0" prefWidth="170.0" style="-fx-background-color: #FAFAFA;" text="Evenement">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font></Button>
+                              <Button onAction="#GetGestionEspace" prefHeight="150.0" prefWidth="170.0" style="-fx-background-color: #FAFAFA;" text="Espace Enfants">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font></Button>
+                              <Button onAction="#GetGestionBabySitter" prefHeight="150.0" prefWidth="170.0" style="-fx-background-color: #FAFAFA;" text="Baby sitter">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font></Button>
+                              <Button onAction="#GetGestionPediatre" prefHeight="25.0" prefWidth="170.0" style="-fx-background-color: #FAFAFA;" text="Pédiatre">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font></Button>
+                           </children>
+                        </HBox>
+                     </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </VBox>
+                  <Separator orientation="VERTICAL" prefHeight="200.0" />
+                  <HBox alignment="CENTER" prefHeight="90.0" prefWidth="228.0" spacing="6.0" style="-fx-background-color: #81CFE0;">
+                     <children>
+                        <VBox alignment="CENTER_RIGHT" fillWidth="false" prefHeight="90.0" prefWidth="126.0" spacing="5.0" style="-fx-background-color: #81CFE0;">
+                           <children>
+                              <Label fx:id="LblUserName" prefHeight="21.0" prefWidth="127.0" text="User name" textAlignment="RIGHT" textFill="WHITE">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Separator prefHeight="0.0" prefWidth="118.0" />
+                              <Label onMouseClicked="#EditProfile" text="Modifier mon profil" textFill="WHITE" underline="true" />
+                              <Label onMouseClicked="#disconnect" text="Deconnexion" textFill="WHITE" underline="true">
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <ImageView fx:id="UserPicture" fitHeight="46.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/Avatar.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane id="centre" fx:id="ContenuPane" layoutX="5.0" layoutY="98.0" prefHeight="571.0" prefWidth="975.0" style="-fx-background-color: #FAFAFA;" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="98.0">
+         <effect>
+            <DropShadow />
+         </effect>
+      </AnchorPane>
+   </children>
+</AnchorPane>

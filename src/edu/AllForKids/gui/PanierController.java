@@ -34,7 +34,9 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Cell;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -42,7 +44,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import static javax.management.Query.value;
 
 /**
  * FXML Controller class
@@ -70,6 +74,7 @@ public class PanierController implements Initializable {
     CrudCommande serviceCommande = new CrudCommande();
     CrudStore servP = new CrudStore();
     Produits p;
+    private TextField nbrArtcile;
 
     /**
      * Initializes the controller class.
@@ -86,7 +91,10 @@ public class PanierController implements Initializable {
         //id.setCellValueFactory(new PropertyValueFactory<>("id"));
         nomprod.setCellValueFactory(new PropertyValueFactory<>("Nom"));
         prix.setCellValueFactory(new PropertyValueFactory<>("Prix"));
-        //Quantite.setCellValueFactory(new PropertyValueFactory<>("Quantite"));
+        quantite.setCellValueFactory(new PropertyValueFactory<>("Quantite"));
+
+        quantite.setEditable(true);
+
         // image.setCellValueFactory(new PropertyValueFactory<>("image"));
         //Dispo.setCellValueFactory(new PropertyValueFactory<>("Disponible"));
         type.setCellValueFactory(new PropertyValueFactory<>("Categorie"));
@@ -99,9 +107,9 @@ public class PanierController implements Initializable {
     @FXML
     private void commander(ActionEvent event) throws ParseException, SQLException {
         lst_com = new ArrayList<>();
-       
+
         ligne_commandes lc = new ligne_commandes();
-        
+
         Commande cmd = new Commande();
         cmd.setIdClient(1);
         DateFormat date_format = new SimpleDateFormat("yyyy/MM/dd");
@@ -111,13 +119,19 @@ public class PanierController implements Initializable {
         lst_com.add(cmd);
         for (int i = 0; i < table.getItems().size(); i++) // if (table.getSelectionModel().getSelectedItem()!=null)
         {
-              Commande c = serviceCommande.ConsulterListe_Commandes();
+            Commande c = serviceCommande.ConsulterListe_Commandes();
             lc.setId_commande(c.getIdCommande());
+
             System.out.println(cmd.getIdCommande());
             //System.err.println(c.getIdCommande());
             //for(int i=0;i<ListeProduits2Controller.panier.size();i++){
+
             p = table.getItems().get(i);
-            int quantite=p.getQuantite();
+            int id = p.getId();
+
+            int quantite = p.getQuantite();
+            QuantiteController qc = new QuantiteController();
+            serviceCommande.DecrementerStock(id,qc.qt);
             lc.setId_produit(p.getId());
             lc.setPrix_commande(p.getPrix());
             lc.setQuantite(1);
@@ -126,6 +140,11 @@ public class PanierController implements Initializable {
 
         }
     }
+
+    private void NbrArtcile(MouseEvent event) {
+        nbrArtcile.setText("");
+    }
+
 }
 
 // System.out.println(panier.listIterator());
