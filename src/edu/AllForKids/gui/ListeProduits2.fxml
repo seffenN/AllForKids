@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane id="AnchorPane" prefHeight="507.0" prefWidth="728.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.AllForKids.gui.ListeProduits2Controller">
+   <children>
+      <TableView fx:id="table" layoutX="28.0" layoutY="12.0" onMouseClicked="#imageAffiche" prefHeight="372.0" prefWidth="466.0">
+        <columns>
+          <TableColumn fx:id="nomProd" prefWidth="140.0" text="NomProduit" />
+          <TableColumn fx:id="prix" prefWidth="148.0" text="Prix" />
+            <TableColumn fx:id="type" prefWidth="176.0" text="Type" />
+        </columns>
+      </TableView>
+      <ImageView fx:id="image" fitHeight="243.0" fitWidth="201.0" layoutX="513.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="301.0" layoutY="397.0" mnemonicParsing="false" onAction="#AjoutPanier" prefHeight="38.0" prefWidth="147.0" text="AjouterAuPanier" />
+      <Button fx:id="pann" layoutX="140.0" layoutY="397.0" mnemonicParsing="false" onAction="#consulter" prefHeight="38.0" prefWidth="147.0" text="Consulter panier" />
+      <Button fx:id="caddie" cacheShape="false" layoutX="544.0" layoutY="38.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="10.0" />
+      <Circle fx:id="nbPanier" fill="#cdcdcd" layoutX="524.0" layoutY="38.0" radius="11.0" stroke="#f8f7f7" strokeType="INSIDE" />
+      <Label fx:id="nbpanier" layoutX="521.0" layoutY="30.0" prefHeight="14.0" prefWidth="22.0" text="0" />
+  <ImageView fitHeight="57.0" fitWidth="93.0" layoutX="524.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+    <image>
+      <Image url="file:///C:/Users/Narjes/Pictures/panier.png" />
+    </image>
+  </ImageView>
+      <ImageView fx:id="sac" fitHeight="25.0" fitWidth="28.0" layoutX="309.0" layoutY="404.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Pictures/1492532808-5-shopping-bag_83223.png" />
+         </image>
+      </ImageView>
+      
+      
+   </children>
+  
+</AnchorPane>
