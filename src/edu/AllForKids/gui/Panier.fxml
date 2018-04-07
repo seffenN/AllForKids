@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.AllForKids.gui.PanierController">
+<AnchorPane id="AnchorPane" prefHeight="370.0" prefWidth="507.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.AllForKids.gui.PanierController">
    <children>
-      <TableView fx:id="table" layoutX="66.0" layoutY="58.0" prefHeight="223.0" prefWidth="397.0">
+      <TableView fx:id="table" layoutX="21.0" layoutY="21.0" prefHeight="213.0" prefWidth="349.0">
         <columns>
-          <TableColumn fx:id="nomprod" prefWidth="98.0" text="Nom Produit" />
-          <TableColumn fx:id="prix" prefWidth="91.0" text="Prix" />
-            <TableColumn fx:id="type" prefWidth="78.0" text="Type" />
-            <TableColumn fx:id="quantite" editable="true" prefWidth="128.0" text="Stock Disponible" />
+          <TableColumn fx:id="nomprod" prefWidth="126.0" text="Nom Produit" />
+          <TableColumn fx:id="prix" prefWidth="100.0" text="Prix" />
+            <TableColumn fx:id="type" prefWidth="122.0" text="Type" />
         </columns>
       </TableView>
-      <Button fx:id="commander" layoutX="287.0" layoutY="296.0" mnemonicParsing="false" onAction="#commander" text="Commander" />
+      <Button fx:id="commander" layoutX="396.0" layoutY="21.0" mnemonicParsing="false" onAction="#commander" style="-fx-background-color: #22A7F0;" text="Commander" textFill="#f5f4f4" />
+      <Label layoutX="21.0" layoutY="271.0" prefHeight="37.0" prefWidth="154.0" text="Prix Total Des Achats" />
+      <Label fx:id="totalPrix" layoutX="150.0" layoutY="271.0" prefHeight="37.0" prefWidth="140.0" text="Label" />
    </children>
 </AnchorPane>

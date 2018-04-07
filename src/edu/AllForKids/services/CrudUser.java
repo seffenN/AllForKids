@@ -20,12 +20,15 @@ import java.util.logging.Logger;
  * @author Narjes
  */
 public class CrudUser {
-Connection con;
+
+    Connection con;
+
     public CrudUser() {
-          con=MyConnexion.getInstance().getConnection();
-        
+        con = MyConnexion.getInstance().getConnection();
+
     }
-     public void ajouter_utilisateur(User u) {
+
+    public void ajouter_utilisateur(User u) {
 
         try {
 
@@ -34,12 +37,11 @@ Connection con;
             pst.setString(1, u.getNom());
             pst.setString(2, u.getEmail());
             pst.setString(3, u.getMdp());
-            pst.setString(4, u.getSexe());
-            pst.setObject(5, u.getRole());
+            pst.setString(5, u.getSexe());
+            pst.setObject(4, u.getRole());
             //pst.setInt(5, u.getAge());
 
-           // pst.setString(6, u.getSexe());
-
+            // pst.setString(6, u.getSexe());
             //pst.setString(7, u.getAdresse());
             pst.executeUpdate();
         } catch (SQLException ex) {
@@ -47,21 +49,21 @@ Connection con;
         }
 
     }
-     public User Verif_Connexion(String email, String motpasse) {
-        User u =null;
-        try {
-            System.out.println("Recupération...");
-            Statement stm =con.createStatement();
-            String sql="select * from user where email='"+email+"'AND password='"+motpasse+"'" ;
-            ResultSet rs = stm.executeQuery(sql);
-            while (rs.next()) {
-           u= new User(rs.getString("email"),rs.getString("password"));
-            System.out.println("Recuperation avec succes");  
-            }
+
+    public User Verif_Connexion(String email, String motpasse) throws SQLException {
+   
+     String requete=" SELECT * FROM user where email='"+email+"' AND password='"+motpasse+"'" ;
+       Statement ste=con.createStatement() ;
+       ResultSet rs=ste.executeQuery(requete);
+      
+        while(rs.next()){
+        
+   User m = new User(rs.getInt("id"), rs.getString("email"), rs.getString("password"),rs.getInt("enabled"));
+
+                
+        return m ;
         }
-           
-           //stm.executeQuery(sql);
-         catch (SQLException ex) {
-        }
-        return u;      }
+        return null ;
+    
+    }
 }

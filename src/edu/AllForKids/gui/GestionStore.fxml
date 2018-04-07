@@ -29,8 +29,8 @@
             <TextField id="Titre" fx:id="txtproduit" promptText="Nom Produit" style="-fx-border-color: #2471A3;" />
             <HBox prefHeight="29.0" prefWidth="187.0" spacing="5.0">
                <children>
-                  <TextField id="affiche" fx:id="FilePath" editable="false" prefHeight="25.0" prefWidth="141.0" promptText="affiche" style="-fx-border-color: #2471A3;" />
                   <Button fx:id="imagebtt" mnemonicParsing="false" onAction="#ImageChoose" prefHeight="27.0" style="-fx-background-color: #22A7F0;" text="Upload" textFill="WHITE" />
+                  <ImageView fx:id="imageprod" fitHeight="76.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </HBox>
             <TextField id="Lieu" fx:id="txtprix" onAction="#LieuChanged2" promptText="Prix" style="-fx-border-color: #2471A3;" />
@@ -50,12 +50,12 @@
       </VBox>
       <VBox layoutX="845.0" layoutY="7.0" prefHeight="642.0" prefWidth="121.0" spacing="5.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#Miseajour" prefHeight="23.0" prefWidth="147.0" style="-fx-background-color: #22A7F0;" text="Mise à jour" textFill="WHITE" />
+            <Button fx:id="bttpdf" mnemonicParsing="false" onAction="#pdf" prefHeight="23.0" prefWidth="147.0" style="-fx-background-color: #22A7F0;" text="Exporter PDF" textFill="WHITE" />
             <Pane prefHeight="52.0" prefWidth="135.0" />
             <HBox prefHeight="41.0" prefWidth="189.0" spacing="5.0">
                <children>
                   <TextField id="cherch" fx:id="Chercher" prefHeight="27.0" prefWidth="119.0" promptText="chercher" style="-fx-border-color: #2471A3;" />
-                  <Button id="ChercherBtn" fx:id="btnchercher" mnemonicParsing="false" onAction="#Search" prefHeight="27.0" prefWidth="62.0" style="-fx-background-color: #22A7F0;" text="chercher" textFill="WHITE" />
+                  <Button id="ChercherBtn" fx:id="btnchercher" mnemonicParsing="false"  prefHeight="27.0" prefWidth="62.0" style="-fx-background-color: #22A7F0;" text="chercher" textFill="WHITE" />
                </children>
             </HBox>
             <Label text="Filtrer par type">
@@ -68,7 +68,7 @@
                <children>
                   <CheckBox id="Randonnée" fx:id="Cultiver" mnemonicParsing="false" text="Vétements" />
                   <CheckBox id="Voyage" fx:id="Distraire" mnemonicParsing="false" text="Jouets" />
-                  <Button id="Filtre" fx:id="filtre" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#Filtre" prefHeight="28.0" prefWidth="62.0" style="-fx-background-color: #22A7F0;" text="Filtrer" textFill="WHITE" />
+                  <Button id="Filtre" fx:id="filtre" contentDisplay="RIGHT" mnemonicParsing="false"  prefHeight="28.0" prefWidth="62.0" style="-fx-background-color: #22A7F0;" text="Filtrer" textFill="WHITE" />
                </children>
             </VBox>
             <HBox alignment="TOP_RIGHT" prefHeight="18.0" prefWidth="189.0">
@@ -80,9 +80,8 @@
       </VBox>
       <VBox layoutX="223.0" layoutY="4.0" prefHeight="671.0" prefWidth="619.0" spacing="6.0">
          <children>
-            <TableView fx:id="table" focusTraversable="false" onMouseClicked="#SlectTable" prefHeight="451.0" prefWidth="570.0">
+            <TableView fx:id="table" focusTraversable="false"  prefHeight="451.0" prefWidth="570.0">
                <columns>
-                  <TableColumn fx:id="id" prefWidth="41.0" text="ID" />
                   <TableColumn fx:id="NomProd" prefWidth="136.0" text="Nom Produit" />
                   <TableColumn fx:id="Prix" prefWidth="81.0" text="Prix" />
                   <TableColumn fx:id="Quantite" prefWidth="117.0" text="Stock Disponible" />

@@ -66,7 +66,6 @@ public class PanierController implements Initializable {
     private TableColumn<Produits, Float> prix;
     @FXML
     private TableColumn<Produits, String> type;
-    @FXML
     private TableColumn<Produits, Integer> quantite;
     @FXML
     private Button commander;
@@ -75,6 +74,10 @@ public class PanierController implements Initializable {
     CrudStore servP = new CrudStore();
     Produits p;
     private TextField nbrArtcile;
+    AfficheProdController qc = new AfficheProdController();
+            int id=AfficheProdController.id;
+    @FXML
+    private Label totalPrix;
 
     /**
      * Initializes the controller class.
@@ -83,17 +86,17 @@ public class PanierController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         //ObservableMap<Produits,Integer> prod;
         List<Produits> lst_P = new ArrayList<>();
-        for (int i = 0; i < ListeProduits2Controller.panier.size(); i++) {
-            lst_P.add(servP.findById((Integer) ListeProduits2Controller.panier.get(i).get(0)));
+        for (int i = 0; i < AfficheProdController.panier.size(); i++) {
+            lst_P.add(servP.findById((Integer) AfficheProdController.panier.get(i).get(0)));
         }
         ObservableList observableList = FXCollections.observableArrayList(lst_P);
         table.setItems(observableList);
         //id.setCellValueFactory(new PropertyValueFactory<>("id"));
         nomprod.setCellValueFactory(new PropertyValueFactory<>("Nom"));
         prix.setCellValueFactory(new PropertyValueFactory<>("Prix"));
-        quantite.setCellValueFactory(new PropertyValueFactory<>("Quantite"));
+      //  quantite.setCellValueFactory(new PropertyValueFactory<>("Quantite"));
 
-        quantite.setEditable(true);
+       // quantite.setEditable(true);
 
         // image.setCellValueFactory(new PropertyValueFactory<>("image"));
         //Dispo.setCellValueFactory(new PropertyValueFactory<>("Disponible"));
@@ -111,7 +114,7 @@ public class PanierController implements Initializable {
         ligne_commandes lc = new ligne_commandes();
 
         Commande cmd = new Commande();
-        cmd.setIdClient(1);
+        cmd.setIdClient(2);
         DateFormat date_format = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
         cmd.setDateCommande(date_format.parse(date_format.format(date)));
@@ -121,30 +124,22 @@ public class PanierController implements Initializable {
         {
             Commande c = serviceCommande.ConsulterListe_Commandes();
             lc.setId_commande(c.getIdCommande());
-
             System.out.println(cmd.getIdCommande());
-            //System.err.println(c.getIdCommande());
-            //for(int i=0;i<ListeProduits2Controller.panier.size();i++){
-
+       
             p = table.getItems().get(i);
-            int id = p.getId();
-
-            int quantite = p.getQuantite();
+            //int quantite = p.getQuantite();
             QuantiteController qc = new QuantiteController();
-            serviceCommande.DecrementerStock(id,qc.qt);
+            
+            System.out.println(id);
+            serviceCommande.DecrementerStock(p.getId(),qc.qt);
             lc.setId_produit(p.getId());
             lc.setPrix_commande(p.getPrix());
-            lc.setQuantite(1);
+            lc.setQuantite(qc.qt);
             serviceCommande.AjouterLigne_Commande(lc);
             // }
 
         }
     }
-
-    private void NbrArtcile(MouseEvent event) {
-        nbrArtcile.setText("");
-    }
-
 }
 
 // System.out.println(panier.listIterator());

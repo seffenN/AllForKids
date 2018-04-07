@@ -72,7 +72,7 @@ public class AccueilFrontEndController implements Initializable {
 
     @FXML
     private void Lougout(MouseEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/Login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
         loader.setController(new LoginController());
 
         Parent root = loader.load();
@@ -105,7 +105,7 @@ public class AccueilFrontEndController implements Initializable {
     @FXML
     private void GetStore(ActionEvent event) throws IOException {
         //setNode(GestionStore);
-        Pane newLoadedPane = FXMLLoader.load(getClass().getResource("ListeProduits2.fxml"));
+        Pane newLoadedPane = FXMLLoader.load(getClass().getResource("AfficheProd.fxml"));
         secPane.getChildren().add(newLoadedPane);
 
     }

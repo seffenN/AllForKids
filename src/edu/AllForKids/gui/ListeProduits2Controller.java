@@ -6,7 +6,7 @@
 package edu.AllForKids.gui;
 
 import edu.AllForKids.entities.Produits;
-import static edu.AllForKids.gui.AfficherProduitsController.p;
+
 import edu.AllForKids.services.CrudStore;
 import java.io.File;
 import java.io.IOException;
@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.Transition;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -41,6 +43,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -61,7 +64,7 @@ public class ListeProduits2Controller implements Initializable {
     private TableColumn<Produits, String> type;
     List<Produits> arrayList;
     CrudStore produitService = new CrudStore();
-    public static Produits p;
+   public static Produits p;
    
     public static List<ArrayList> panier = new ArrayList<>();
     @FXML
@@ -75,6 +78,10 @@ public class ListeProduits2Controller implements Initializable {
     private Circle nbPanier;
     @FXML
     private ImageView sac;
+    @FXML
+    private Button ajoutaupan;
+    @FXML
+    private ImageView cadd;
 
     /**
      * Initializes the controller class.
@@ -93,6 +100,7 @@ public class ListeProduits2Controller implements Initializable {
         //Dispo.setCellValueFactory(new PropertyValueFactory<>("Disponible"));
         type.setCellValueFactory(new PropertyValueFactory<>("Categorie"));
         //Etat.setCellValueFactory(new PropertyValueFactory<>("etat"));
+       
 
     }
 
@@ -123,8 +131,13 @@ public class ListeProduits2Controller implements Initializable {
             Stage stage = new Stage();
          FXMLLoader loader=new FXMLLoader(getClass().getResource("Quantite.fxml"));
         Parent root=loader.load();
-        QuantiteController dpc=loader.getController();
-        
+        //QuantiteController dpc=loader.getController();
+         TranslateTransition t=new TranslateTransition();
+        t.setDuration(Duration.seconds(4));
+        t.setNode(sac);
+        t.setToX(524);
+        t.setToY(19);
+        t.play();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();

@@ -10,29 +10,25 @@ package edu.AllForKids.entities;
  * @author Narjes
  */
 public class User {
-    int id_user;
-    String nom;
-    String Email;
-    String sexe;
-    String mdp;
-      int enabled;
 
-    public User( String Email,  String mdp) {
-       
+    private int id_user;
+    private String nom;
+    private String Email;
+    private String sexe;
+    private String mdp;
+    private int enabled;
+
+    public User(int id_user,String Email, String mdp,int enabled) {
+ this.id_user=id_user;
         this.Email = Email;
-       
+       this.enabled=enabled;
+      
         this.mdp = mdp;
-       
+
     }
 
     public User() {
     }
-    
-
-  
-
-    
-     
 
     public String getMdp() {
         return mdp;
@@ -45,7 +41,7 @@ public class User {
     public void setEnabled(int enabled) {
         this.enabled = enabled;
     }
-    
+
 
     public void setMdp(String mdp) {
         this.mdp = mdp;
@@ -92,9 +88,4 @@ public class User {
         this.role = role;
     }
 
-   
-    
-
-   
-    
 }

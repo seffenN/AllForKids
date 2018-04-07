@@ -29,12 +29,12 @@ public class AjoutMain extends Application {
         
         Parent root;
         try {
-             //root = FXMLLoader.load(getClass().getResource("GestionStore.fxml"));
-              //root = FXMLLoader.load(getClass().getResource("AccueilBackEnd.fxml"));
+           // root = FXMLLoader.load(getClass().getResource("GestionStore.fxml"));
+            // root = FXMLLoader.load(getClass().getResource("AfficheProd.fxml"));
              root = FXMLLoader.load(getClass().getResource("AccueilFrontEnd.fxml"));
              // root = FXMLLoader.load(getClass().getResource("AfficherProduits.fxml"));
                //root = FXMLLoader.load(getClass().getResource("ListeProduits2.fxml"));
-           // root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+            //root = FXMLLoader.load(getClass().getResource("Login.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);

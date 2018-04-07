@@ -6,10 +6,11 @@
 package edu.AllForKids.gui;
 
 import edu.AllForKids.entities.User;
-import static edu.AllForKids.gui.AfficherProduitsController.p;
+
 import edu.AllForKids.services.CrudUser;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,6 +46,9 @@ public class LoginController implements Initializable {
     private Text BtnForgetPassword;
     @FXML
     private Button btnsignup;
+    User CurrentUser;
+    public static String pseudo;
+    CrudUser crudutilisateur = new CrudUser();
 
     /**
      * Initializes the controller class.
@@ -52,22 +56,22 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-
-    @FXML
-    private void Register(ActionEvent event) throws IOException {
-       
-            //id.setText(String.valueOf(p.getId()));
-            Stage stage=new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("Register.fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show(); 
     }
 
     @FXML
-    private void seConnecter(ActionEvent event) throws IOException {
-          tfmail.setStyle(" -fx-border-color : white ; -fx-border-width :  0 0 2px 0 ; -fx-background-color :  transparent ; -fx-text-fill : white");
+    private void Register(ActionEvent event) throws IOException {
+
+        //id.setText(String.valueOf(p.getId()));
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("Register.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void seConnecter(ActionEvent event) throws IOException, SQLException {
+        tfmail.setStyle(" -fx-border-color : white ; -fx-border-width :  0 0 2px 0 ; -fx-background-color :  transparent ; -fx-text-fill : white");
         tfpass.setStyle(" -fx-border-color : white ; -fx-border-width :  0 0 2px 0 ; -fx-background-color :  transparent ; -fx-text-fill : white");
 
         if (tfmail.getText().equals("") || tfpass.getText().equals("")) {
@@ -82,42 +86,29 @@ public class LoginController implements Initializable {
                 tfpass.setStyle("-fx-border-color : red ; -fx-border-width :  0 0 2px 0 ; -fx-background-color :  transparent ; -fx-text-fill : white ");
             }
         } else {
-            String email = tfmail.getText();
+             String email = tfmail.getText();
             String pass = tfpass.getText();
             CrudUser crudutilisateur = new CrudUser();
             User u = crudutilisateur.Verif_Connexion(email, pass);
-           
+                            System.out.println("user******"+u);
+
             if (u == null) {
-               Alert a = new Alert(Alert.AlertType.WARNING);
-                 //Parent root = FXMLLoader.load(getClass().getResource("AfficherProduits.fxml"));
-           // Scene scene = new Scene(root);
-           // Stage stage=new Stage();
-           // stage.setScene(scene);
-           // stage.show();
-               a.setContentText("mdp ou email incorrect");
+                System.out.println("iln'yapas dns base");
+                Alert a = new Alert(Alert.AlertType.WARNING);
+                a.setContentText("Email ou mot de passe incorrect");
                 a.showAndWait();
-            } else if (u.getEnabled() != 1) {
-                Alert b = new Alert(Alert.AlertType.ERROR);
-                b.setContentText("Compte n'est pas confirmé ou bien deactivé par l'admin");
-                b.showAndWait();
-            }
-            /*else {
+                System.out.println("mailfaut");
+
+            } else {
+                System.out.println("hhhhhhhhh");
                 CurrentUser = u;
-                if (u.getRoles().equals("admin")) {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("AccueilBackEnd.fxml"));
-                    loader.setController(new AccueilBackEndController(primaryStage));
-
-                    AnchorPane root = loader.load();
-                    AccueilBackEndController dashboard = loader.getController();
-
-                    dashboard.setLabelUserName(u.getUsername(), u.getId());
-                    Scene scene = new Scene(root);
-                    primaryStage.setTitle("Accueil");
-                    primaryStage.setScene(scene);
-                    primaryStage.show();
-                    primaryStage.setMaximized(true);
-
-                } else if (u.getRoles().equals("parent")) {
+              Stage primaryStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("AccueilFrontEnd.fxml"));
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+                }
+                /*else if (u.getRoles().equals("parent")) {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("AcceuilFrontEnd.fxml"));
                     loader.setController(new AcceuilFrontEndController(primaryStage));
 
@@ -132,9 +123,8 @@ public class LoginController implements Initializable {
                     primaryStage.setMaximized(true);
 
                 }
+            }*/
             }
-        }*/
-        
+
+        }
     }
-    }  
-}
