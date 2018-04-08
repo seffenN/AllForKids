@@ -114,7 +114,7 @@ public class PanierController implements Initializable {
         ligne_commandes lc = new ligne_commandes();
 
         Commande cmd = new Commande();
-        cmd.setIdClient(2);
+        cmd.setIdClient(LoginController.CurrentUser.getId());
         DateFormat date_format = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
         cmd.setDateCommande(date_format.parse(date_format.format(date)));

@@ -46,7 +46,7 @@ public class LoginController implements Initializable {
     private Text BtnForgetPassword;
     @FXML
     private Button btnsignup;
-    User CurrentUser;
+   public static User CurrentUser;
     public static String pseudo;
     CrudUser crudutilisateur = new CrudUser();
 
@@ -71,7 +71,7 @@ public class LoginController implements Initializable {
 
     @FXML
     private void seConnecter(ActionEvent event) throws IOException, SQLException {
-        tfmail.setStyle(" -fx-border-color : white ; -fx-border-width :  0 0 2px 0 ; -fx-background-color :  transparent ; -fx-text-fill : white");
+           tfmail.setStyle(" -fx-border-color : white ; -fx-border-width :  0 0 2px 0 ; -fx-background-color :  transparent ; -fx-text-fill : white");
         tfpass.setStyle(" -fx-border-color : white ; -fx-border-width :  0 0 2px 0 ; -fx-background-color :  transparent ; -fx-text-fill : white");
 
         if (tfmail.getText().equals("") || tfpass.getText().equals("")) {
@@ -81,16 +81,22 @@ public class LoginController implements Initializable {
 
             if (tfmail.getText().equals("")) {
                 tfmail.setStyle("-fx-border-color : red ; -fx-border-width :  0 0 2px 0 ; -fx-background-color :  transparent ; -fx-text-fill : white ");
+            Alert b = new Alert(Alert.AlertType.WARNING);
+            a.setContentText("Veuillez inserer votre email ");
+            a.showAndWait();
             }
             if (tfpass.getText().equals("")) {
                 tfpass.setStyle("-fx-border-color : red ; -fx-border-width :  0 0 2px 0 ; -fx-background-color :  transparent ; -fx-text-fill : white ");
+            Alert c = new Alert(Alert.AlertType.WARNING);
+            a.setContentText("Veuillez inserer  et votre mot de pass");
+            a.showAndWait();
             }
         } else {
-             String email = tfmail.getText();
+            String email = tfmail.getText();
             String pass = tfpass.getText();
             CrudUser crudutilisateur = new CrudUser();
-            User u = crudutilisateur.Verif_Connexion(email, pass);
-                            System.out.println("user******"+u);
+            User u = crudutilisateur.Authentification(email, pass);
+                            System.out.println("user n'est pas null *****"+u);
 
             if (u == null) {
                 System.out.println("iln'yapas dns base");
@@ -99,32 +105,53 @@ public class LoginController implements Initializable {
                 a.showAndWait();
                 System.out.println("mailfaut");
 
-            } else {
-                System.out.println("hhhhhhhhh");
+            }else {
                 CurrentUser = u;
-              Stage primaryStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("AccueilFrontEnd.fxml"));
-        Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+                if(!u.getRoles().equals("Parent")){
+                System.out.println("parent");
+                
+               
+             ((Node)event.getSource()).getScene().getWindow().hide();
+            Stage stage=new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("AccueilFrontEnd.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show(); 
                 }
-                /*else if (u.getRoles().equals("parent")) {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("AcceuilFrontEnd.fxml"));
-                    loader.setController(new AcceuilFrontEndController(primaryStage));
-
-                    BorderPane root = loader.load();
-                    AcceuilFrontEndController frontaceuil = loader.getController();
-
-                    frontaceuil.setLabelUserName(u.getUsername(), u.getId());
-                    Scene scene = new Scene(root);
-                    primaryStage.setTitle("Accueil");
-                    primaryStage.setScene(scene);
-                    primaryStage.show();
-                    primaryStage.setMaximized(true);
+            
+         
+                else if (!u.getRoles().equals("Admin")){
+                 
+        ((Node)event.getSource()).getScene().getWindow().hide();
+            Stage stage=new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("AccueilFrontEnd.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show(); 
+                }
+                else if (!u.getRoles().equals("Pediatre")){
+                                        System.out.println("    ped");
+((Node)event.getSource()).getScene().getWindow().hide();
+            Stage stage=new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("AccueilBackEnd.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show(); 
 
                 }
-            }*/
+                else if (!u.getRoles().equals("BabySitter")){
+                ((Node)event.getSource()).getScene().getWindow().hide();
+            Stage stage=new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("AccueilBackEnd.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show(); 
+
+                }
+
+                
             }
-
         }
+      
     }
+}

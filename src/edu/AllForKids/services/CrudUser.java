@@ -32,33 +32,60 @@ public class CrudUser {
 
         try {
 
-            String query = "INSERT INTO user (username, email,password, roles,Sexe) VALUES(?,?,?,?,?)";
+            String query = "INSERT INTO user (username, email,password, roles,  Age,  Sexe, adresse,nom_image) VALUES(?,?,?,?,?,?,?,?)";
             PreparedStatement pst = con.prepareStatement(query);
-            pst.setString(1, u.getNom());
+            pst.setString(1, u.getUsername());
             pst.setString(2, u.getEmail());
-            pst.setString(3, u.getMdp());
-            pst.setString(5, u.getSexe());
-            pst.setObject(4, u.getRole());
-            //pst.setInt(5, u.getAge());
+            pst.setString(3, u.getPassword());
+            pst.setString(4, u.getRoles());
+            pst.setInt(5, u.getAge());
 
-            // pst.setString(6, u.getSexe());
-            //pst.setString(7, u.getAdresse());
+            pst.setString(6, u.getSexe());
+
+            pst.setString(7, u.getAdresse());
+                        pst.setString(8, u.getNom_image());
+
             pst.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
+        }}
+   
+
+   
+    public User FindByEmail(String email) {
+        try {
+            String requete = "SELECT * FROM user where email='" + email + "'";
+           Statement ste = con.createStatement();
+           ResultSet rs = ste.executeQuery(requete);
+            
+            while (rs.next()) {
+                
+                User m = new User(rs.getInt("id"), 
+                        rs.getString("username"),
+                        rs.getString("email"),
+                        rs.getString("sexe"),
+                        rs.getString("roles"),
+                        rs.getString("password"));
+                return m;
+            }
+            
+           
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
         }
+        return null;
 
     }
 
-    public User Verif_Connexion(String email, String motpasse) throws SQLException {
-   
-     String requete=" SELECT * FROM user where email='"+email+"' AND password='"+motpasse+"'" ;
+    public  User Authentification(String email , String password) throws SQLException{
+        String requete=" SELECT * FROM user where email='"+email+"' AND password='"+password+"'" ;
        Statement ste=con.createStatement() ;
        ResultSet rs=ste.executeQuery(requete);
       
         while(rs.next()){
         
-   User m = new User(rs.getInt("id"), rs.getString("email"), rs.getString("password"),rs.getInt("enabled"));
+   User m = new User(rs.getInt("id"), rs.getString("username"), rs.getString("email"),rs.getInt("enabled"),
+           rs.getString("password"), rs.getString("roles"),rs.getString("nom_image"));
 
                 
         return m ;

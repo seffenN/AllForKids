@@ -387,7 +387,7 @@ public class GestionStoreController implements Initializable {
 
             if ("Modifier".equals(modifierprod.getText())) {
                 afficherProdAmodifier();
-                //AddEvent.setVisible(false);
+                bttajout.setVisible(false);
                 modifierprod.setText("Enregistrer");
             }
 

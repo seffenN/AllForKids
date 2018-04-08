@@ -6,9 +6,12 @@
 package edu.AllForKids.gui;
 
 import edu.AllForKids.gui.LoginController;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -39,8 +43,6 @@ public class AccueilFrontEndController implements Initializable {
     @FXML
     private ImageView UserImage;
     @FXML
-    private Button BtnActualite;
-    @FXML
     private Button BtnStore;
     @FXML
     private Button BtnBabySitter;
@@ -50,7 +52,6 @@ public class AccueilFrontEndController implements Initializable {
     private Button BtnEspace;
     @FXML
     private Button BtnPediatre;
-    @FXML
     private ScrollPane AncoMain;
 
     /**
@@ -58,12 +59,39 @@ public class AccueilFrontEndController implements Initializable {
      */
     Stage primaryStage;
     AnchorPane GestionUser, ActualiteClient, GestionStore, GestionEvenement, GestionEspace, GestionBabySitter, GestionPediatre;
+   
     @FXML
-    private AnchorPane secPane;
+    private Button BtnAcceuil;
+    @FXML
+    private ScrollPane SrollPaneMain;
+    @FXML
+    private AnchorPane ScrollPaneMain;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.primaryStage = primaryStage;
+        try {
+           // GestionEvenement = FXMLLoader.load(getClass().getResource("EvenementFrontEnd.fxml"));
+            //GestionEspace = FXMLLoader.load(getClass().getResource(".fxml"));
+            // GestionBabySitter = FXMLLoader.load(getClass().getResource(".fxml"));
+            //GestionPediatre = FXMLLoader.load(getClass().getResource(".fxml"));
+            // GestionStore = FXMLLoader.load(getClass().getResource(".fxml"));
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+
+            Parent root = loader.load();
+
+            LoginController controllerLog = loader.getController();
+            System.out.println("*****" + controllerLog.CurrentUser.getUsername());
+            UserName.setText(controllerLog.CurrentUser.getUsername());
+            //  UserImage.setImage(new Image("file:" + CurrentUser.getNom_image()));
+            File file=new File("C:\\wamp64\\www\\PI4\\web\\images\\"+controllerLog.CurrentUser.getNom_image());
+            Image img = new Image(file.toURI().toString());
+            UserImage.setImage(img);
+        } catch (IOException ex) {
+            Logger.getLogger(AccueilFrontEndController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+      
     }
 
     @FXML
@@ -106,7 +134,7 @@ public class AccueilFrontEndController implements Initializable {
     private void GetStore(ActionEvent event) throws IOException {
         //setNode(GestionStore);
         Pane newLoadedPane = FXMLLoader.load(getClass().getResource("AfficheProd.fxml"));
-        secPane.getChildren().add(newLoadedPane);
+        ScrollPaneMain.getChildren().add(newLoadedPane);
 
     }
 

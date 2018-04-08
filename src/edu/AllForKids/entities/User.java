@@ -5,6 +5,7 @@
  */
 package edu.AllForKids.entities;
 
+import java.util.Date;
 /**
  *
  * @author Narjes
@@ -12,26 +13,125 @@ package edu.AllForKids.entities;
 public class User {
 
     private int id_user;
-    private String nom;
-    private String Email;
-    private String sexe;
-    private String mdp;
+     private int id;
+    private String username;
+    private String username_canonical;
+    private String email;
+    private String email_canonical;
     private int enabled;
-
-    public User(int id_user,String Email, String mdp,int enabled) {
- this.id_user=id_user;
-        this.Email = Email;
-       this.enabled=enabled;
-      
-        this.mdp = mdp;
-
-    }
+    private String salt;
+    private String password;
+    private Date last_login;
+    private String confirmation_token;
+    private Date password_requested_at;
+    private String roles;
+    private String nom_image;
+    private int Age;
+    private String Sexe;
+    private String adresse;
+    private String Ville;
+    private int nbrAnneeExp;
+    private String Etat;
+    private int numTe;
 
     public User() {
     }
 
-    public String getMdp() {
-        return mdp;
+    public User(String username, String email, String password, String roles, int Age, String Sexe, String adresse) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+        this.Age = Age;
+        this.Sexe = Sexe;
+        this.adresse = adresse;
+    }
+
+    public User(String username, String email, String password, String nom_image, String roles, String Sexe) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.nom_image = nom_image;
+
+        this.roles = roles;
+        this.Sexe = Sexe;
+    }
+
+    public User(int id, String username, String email, int enabled, String password, String roles, String nom_image) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.enabled = enabled;
+        this.password = password;
+        this.roles = roles;
+        this.nom_image = nom_image;
+
+    }
+
+    public User(String email, String password) {
+        this.password = password;
+        this.email = email;
+    }
+
+    public User(int id, String username, String email, String password, String roles, String Sexe) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+        this.Sexe = Sexe;
+    }
+
+    public User(int id, String username, String email, String password, String roles, String nom_image, String Sexe, String adresse, int enabled) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+        this.nom_image = nom_image;
+        this.Sexe = Sexe;
+        this.adresse = adresse;
+        this.enabled = enabled;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUsername_canonical() {
+        return username_canonical;
+    }
+
+    public void setUsername_canonical(String username_canonical) {
+        this.username_canonical = username_canonical;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail_canonical() {
+        return email_canonical;
+    }
+
+    public void setEmail_canonical(String email_canonical) {
+        this.email_canonical = email_canonical;
     }
 
     public int getEnabled() {
@@ -42,50 +142,121 @@ public class User {
         this.enabled = enabled;
     }
 
-
-    public void setMdp(String mdp) {
-        this.mdp = mdp;
-    }
-    String role;
-
-    public int getId_user() {
-        return id_user;
+    public String getSalt() {
+        return salt;
     }
 
-    public void setId_user(int id_user) {
-        this.id_user = id_user;
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
-    public String getNom() {
-        return nom;
+    public String getPassword() {
+        return password;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getEmail() {
-        return Email;
+    public Date getLast_login() {
+        return last_login;
     }
 
-    public void setEmail(String Email) {
-        this.Email = Email;
+    public void setLast_login(Date last_login) {
+        this.last_login = last_login;
+    }
+
+    public String getConfirmation_token() {
+        return confirmation_token;
+    }
+
+    public void setConfirmation_token(String confirmation_token) {
+        this.confirmation_token = confirmation_token;
+    }
+
+    public Date getPassword_requested_at() {
+        return password_requested_at;
+    }
+
+    public void setPassword_requested_at(Date password_requested_at) {
+        this.password_requested_at = password_requested_at;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
+    }
+
+    public String getNom_image() {
+        return nom_image;
+    }
+
+    public void setNom_image(String nom_image) {
+        this.nom_image = nom_image;
+    }
+
+    public int getAge() {
+        return Age;
+    }
+
+    public void setAge(int Age) {
+        this.Age = Age;
     }
 
     public String getSexe() {
-        return sexe;
+        return Sexe;
     }
 
-    public void setSexe(String sexe) {
-        this.sexe = sexe;
+    public void setSexe(String Sexe) {
+        this.Sexe = Sexe;
     }
 
-    public String getRole() {
-        return role;
+    public String getAdresse() {
+        return adresse;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getVille() {
+        return Ville;
+    }
+
+    public void setVille(String Ville) {
+        this.Ville = Ville;
+    }
+
+    public int getNbrAnneeExp() {
+        return nbrAnneeExp;
+    }
+
+    public void setNbrAnneeExp(int nbrAnneeExp) {
+        this.nbrAnneeExp = nbrAnneeExp;
+    }
+
+    public String getEtat() {
+        return Etat;
+    }
+
+    public void setEtat(String Etat) {
+        this.Etat = Etat;
+    }
+
+    public int getNumTe() {
+        return numTe;
+    }
+
+    public void setNumTe(int numTe) {
+        this.numTe = numTe;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", username=" + username + ", username_canonical=" + username_canonical + ", email=" + email + ", email_canonical=" + email_canonical + ", enabled=" + enabled + ", salt=" + salt + ", password=" + password + ", last_login=" + last_login + ", confirmation_token=" + confirmation_token + ", password_requested_at=" + password_requested_at + ", roles=" + roles + ", nom_image=" + nom_image + ", Age=" + Age + ", Sexe=" + Sexe + ", adresse=" + adresse + ", Ville=" + Ville + ", nbrAnneeExp=" + nbrAnneeExp + ", Etat=" + Etat + ", numTe=" + numTe + '}';
     }
 
 }
