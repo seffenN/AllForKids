@@ -8,16 +8,17 @@ package edu.AllForKids.gui;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import edu.AllForKids.entities.Produits;
 
-import static edu.AllForKids.gui.AjoutProdController.copier;
 
 import edu.AllForKids.services.CrudStore;
 import edu.AllForKids.utils.MyConnexion;
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -55,16 +56,20 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.ImageViewBuilder;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import javax.swing.JOptionPane;
 
 /**
@@ -179,6 +184,7 @@ public class GestionStoreController implements Initializable {
         cat.setCellValueFactory(new PropertyValueFactory<>("Categorie"));
         //image.setCellValueFactory(new PropertyValueFactory<>("image"));
         Dispo.setCellValueFactory(new PropertyValueFactory<>("Disponible"));
+   
 
         // Etat.setCellValueFactory(new PropertyValueFactory<>("etat"));
     }
@@ -266,6 +272,18 @@ public class GestionStoreController implements Initializable {
                 Image i = new Image(file.toURI().toString());
                 imageprod.setImage(i);
 
+            }else if (file.getName().contains(".png")){
+                System.out.println(UUID.randomUUID().toString().concat(".png"));
+                String uuid = UUID.randomUUID().toString().concat(".png");
+                path1 = file.getAbsolutePath();
+                System.out.println(path1);
+                file1 = new File(path1);
+                source = new File(path1);
+                dest = new File("C:\\wamp64\\www\\PI4\\web\\bundles\\images\\" + uuid);
+                path1 = uuid;
+                Image i = new Image(file.toURI().toString());
+                imageprod.setImage(i);
+                
             }
 
         }
@@ -431,7 +449,7 @@ public class GestionStoreController implements Initializable {
 
     @FXML
     private void pdf(ActionEvent event) throws SQLException, FileNotFoundException, DocumentException {
-        String requete = "SELECT * FROM vehicules";
+        String requete = "SELECT * FROM produits";
 
         Connection cnx = MyConnexion.getInstance().getConnection();
         PreparedStatement pst = cnx.prepareStatement(requete);
@@ -451,6 +469,43 @@ public class GestionStoreController implements Initializable {
         table.addCell("Stock");
 
         table.addCell("Categorie");
+        while (rs.next()) {
+            String NomProds = rs.getString("Nom");
+            table_cell = new PdfPCell(new Phrase(NomProds));
+            table.addCell(table_cell);
+
+            String prix = rs.getString("Prix");
+            table_cell = new PdfPCell(new Phrase(prix));
+            table.addCell(table_cell);
+
+            String Stock = rs.getString("Quantite");
+            table_cell = new PdfPCell(new Phrase(Stock));
+            table.addCell(table_cell);
+
+            String cats = rs.getString("Categorie");
+            table_cell = new PdfPCell(new Phrase(cats));
+            table.addCell(table_cell);
+
+}
+         doc.add(table);
+        doc.close();
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("PDF Exported Successfully ");
+
+        alert.setContentText("PDF Exported Successfully ");
+        alert.showAndWait();
+
+        // to launch the pdf immediately after exporting 
+        if (Desktop.isDesktopSupported()) {
+            try {
+                File myFile = new File("C:\\Users\\Narjes\\Documents\\NetBeansProjects\\AllForkids\\");
+                Desktop.getDesktop().open(myFile);
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+
 
     }
 

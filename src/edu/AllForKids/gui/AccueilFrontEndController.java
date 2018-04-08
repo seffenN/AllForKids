@@ -102,7 +102,6 @@ public class AccueilFrontEndController implements Initializable {
     private void Lougout(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
         loader.setController(new LoginController());
-
         Parent root = loader.load();
         Scene scene = new Scene(root);
         primaryStage.setTitle("Connexion");

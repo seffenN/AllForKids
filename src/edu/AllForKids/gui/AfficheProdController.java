@@ -6,6 +6,7 @@
 package edu.AllForKids.gui;
 
 import edu.AllForKids.entities.Produits;
+import static edu.AllForKids.gui.LoginController.nb_produits_panier;
 
 import edu.AllForKids.services.CrudStore;
 import java.io.File;
@@ -31,6 +32,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -47,6 +49,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -67,13 +70,13 @@ public class AfficheProdController implements Initializable {
     private CheckBox Distraire;
     @FXML
     private ScrollPane LisTProd;
-    int nbProdPanier=0;
-    public static int nbrArtcile;
-    public static int id=0;
+    //int nbProdPanier=0;
+    // public static int nbrArtcile;
+    public static int id = 0;
     public static int stock;
-   // public static Produits p;
+    // public static Produits p;
     // Produits p=null;
- public static List<ArrayList> panier = new ArrayList<>();
+// public static List<ArrayList> panier = new ArrayList<>();
     @FXML
     private Circle nbPanier;
     @FXML
@@ -82,17 +85,16 @@ public class AfficheProdController implements Initializable {
     private ImageView cadd;
     @FXML
     private Button bttVoir;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-     bttVoir.setVisible(false);
+        bttVoir.setVisible(false);
         try {
             LisTProd.setContent(ListofProducts());
-            
-            
-            
+
             // TODO
         } catch (SQLException ex) {
             Logger.getLogger(AfficheProdController.class.getName()).log(Level.SEVERE, null, ex);
@@ -116,11 +118,11 @@ public class AfficheProdController implements Initializable {
             HBox root = new HBox(10);
             root.setAlignment(Pos.CENTER_LEFT);
             root.setStyle("-fx-Border-color:  #2471A3");
-           // root.setStyle("-fx-background-color: #F0FFFF");
+            // root.setStyle("-fx-background-color: #F0FFFF");
             root.setPadding(new Insets(5, 5, 5, 5));
             try {
-              Produits p = OL.get(i);
-              
+                Produits p = OL.get(i);
+
                 File file = new File("C:\\wamp64\\www\\PI4\\web\\bundles\\images\\" + p.getImage());
                 Image image = new Image(file.toURI().toString());
                 System.out.println("ok");
@@ -142,13 +144,13 @@ public class AfficheProdController implements Initializable {
                 Description.setTextFill(Color.web("#17202A"));
                 VBox root3 = new VBox(3);
                 Separator sep2 = new Separator(Orientation.HORIZONTAL);
-                
+
                 Label Tarif = new Label("Prix : " + p.getPrix());
                 Tarif.setTextFill(Color.web("#17202A"));
                 Label categorie = new Label("categorie :" + p.getCategorie());
                 categorie.setTextFill(Color.web("#17202A"));
-                  Label idHidden = new Label( ""+p.getId());
-                  idHidden.setVisible(false);
+                Label idHidden = new Label("" + p.getId());
+                idHidden.setVisible(false);
                 HBox Hbtn = new HBox(10);
                 Button button = new Button("Ajout au Panier");
                 button.setStyle("-fx-background-color:  #2471A3");
@@ -156,23 +158,31 @@ public class AfficheProdController implements Initializable {
                 // button.setAccessibleText("" + E.getId_even());
                 button.onActionProperty().set((event) -> {
                     try {
+                        if(p.getQuantite()<1){
+                             Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur ");
+                alert.setHeaderText("Attention");
+                alert.setContentText("Rupture du stock!");
+                alert.showAndWait();
+                        }else{
                         ArrayList<Object> nb_pdt = new ArrayList<>();
-                        nb_pdt.add(0, p.getId());
+                        nb_pdt.add(p.getId());
                         System.out.println(nb_pdt);
-                        nb_pdt.add(1, 1);
+                        // nb_pdt.add(1, 1);
                         System.out.println(nb_pdt);
-                        panier.add(nb_pdt);
-                        nbProdPanier=nbProdPanier+1;
-                         nbpanier.setText(""+nbProdPanier);
-                         id=p.getId();
-                         Stage stage = new Stage();
-       Parent roots = FXMLLoader.load(getClass().getResource("Quantite.fxml"));
-        Scene scene = new Scene(roots);
-        stage.setScene(scene);
-        stage.show();
-        bttVoir.setVisible(true);
-                        
-                        
+                        LoginController.panier.add(nb_pdt);
+                        LoginController.nb_produits_panier = nb_produits_panier + 1;
+                        nbpanier.setText("" + nb_produits_panier);
+                        id = p.getId();
+                        Stage stage = new Stage();
+                        Parent roots = FXMLLoader.load(getClass().getResource("Quantite.fxml"));
+
+                        Scene scene = new Scene(roots);
+                        stage.setScene(scene);
+                        stage.show();
+                        bttVoir.setVisible(true);
+                        }
+
                     } catch (IOException ex) {
                         Logger.getLogger(AfficheProdController.class.getName()).log(Level.SEVERE, null, ex);
                     }

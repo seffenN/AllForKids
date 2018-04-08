@@ -9,7 +9,6 @@ import com.jfoenix.controls.JFXButton;
 import edu.AllForKids.entities.Commande;
 import edu.AllForKids.entities.Produits;
 import edu.AllForKids.entities.ligne_commandes;
-import static edu.AllForKids.gui.ListeProduits2Controller.p;
 import edu.AllForKids.services.CrudCommande;
 import edu.AllForKids.services.CrudStore;
 import java.io.IOException;
@@ -35,7 +34,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Cell;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
@@ -78,6 +79,8 @@ public class PanierController implements Initializable {
             int id=AfficheProdController.id;
     @FXML
     private Label totalPrix;
+    @FXML
+    private Button btn;
 
     /**
      * Initializes the controller class.
@@ -86,8 +89,8 @@ public class PanierController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         //ObservableMap<Produits,Integer> prod;
         List<Produits> lst_P = new ArrayList<>();
-        for (int i = 0; i < AfficheProdController.panier.size(); i++) {
-            lst_P.add(servP.findById((Integer) AfficheProdController.panier.get(i).get(0)));
+        for (int i = 0; i <LoginController.panier.size(); i++) {
+            lst_P.add(servP.findById((Integer) LoginController.panier.get(i).get(0)));
         }
         ObservableList observableList = FXCollections.observableArrayList(lst_P);
         table.setItems(observableList);
@@ -140,6 +143,32 @@ public class PanierController implements Initializable {
 
         }
     }
+
+    @FXML
+    private void suprrimerDuPanier(ActionEvent event) {
+         if (table.getSelectionModel().getSelectedItem()!=null){
+             int indice_prod=table.getSelectionModel().getSelectedIndex();
+             p = table.getItems().get(table.getSelectionModel().getSelectedIndex());
+               Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation suppression");
+            alert.setHeaderText("Confirmer ");
+            alert.setContentText("Vous-etes sur de supprimer le produit " + p.getNom() + " ?");
+             Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                LoginController.panier.remove(indice_prod);
+                List<Produits> lst_P = new ArrayList<>();
+        for (int i = 0; i <LoginController.panier.size(); i++) {
+            lst_P.add(servP.findById((Integer) LoginController.panier.get(i).get(0)));
+        }
+        ObservableList observableList = FXCollections.observableArrayList(lst_P);
+        table.setItems(observableList);
+        nomprod.setCellValueFactory(new PropertyValueFactory<>("Nom"));
+        prix.setCellValueFactory(new PropertyValueFactory<>("Prix"));
+        type.setCellValueFactory(new PropertyValueFactory<>("Categorie"));
+            }
+            }
+         }
+    
 }
 
 // System.out.println(panier.listIterator());

@@ -18,6 +18,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -36,12 +39,15 @@ public class QuantiteController implements Initializable {
 
     public static int qt;
     CrudStore prodService=new CrudStore();
+    @FXML
+    private AnchorPane monFrame;
             
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         // TODO
     }    
 
@@ -53,13 +59,20 @@ public class QuantiteController implements Initializable {
                 alert.setHeaderText("Attention");
                 alert.setContentText("Vous devez saisir le nombre d'article!");
                 alert.showAndWait();
-        }else if(Integer.parseInt(nbrArticle.getText()) < 0){
+        }else if(Integer.parseInt(nbrArticle.getText()) <0){
              Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Erreur de saisie");
                 alert.setHeaderText("Attention");
-                alert.setContentText("Quantité Négatif !");
+                alert.setContentText("Nombre d'article ne peut pas étre négatif !");
+                alert.showAndWait();
+        } else if(Integer.parseInt(nbrArticle.getText())==0){
+             Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur de saisie");
+                alert.setHeaderText("Attention");
+                alert.setContentText("Nombre d'article ne peut pas étre null !");
                 alert.showAndWait();
                
+         
         }else if(prodService.Stock(AfficheProdController.id, Integer.parseInt(nbrArticle.getText()))){
              System.out.println("ok");
              Alert alert = new Alert(Alert.AlertType.ERROR);

@@ -90,6 +90,8 @@ String path1="";
     private ToggleGroup gender;
     @FXML
     private ComboBox<String> Role;
+    @FXML
+    private ImageView bttimage;
 
     /**
      * Initializes the controller class.
@@ -300,7 +302,9 @@ String path1="";
                  source = new File(path1);
 
                 dest = new File("C:\\wamp64\\www\\PI4\\web\\images\\" + uuid);
-                path1 = uuid;
+                path1 = uuid;  Image i = new Image(file.toURI().toString());
+                bttimage.setImage(i);
+                
                
             }
         }

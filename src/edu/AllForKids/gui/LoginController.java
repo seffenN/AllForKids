@@ -11,6 +11,8 @@ import edu.AllForKids.services.CrudUser;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -49,6 +51,8 @@ public class LoginController implements Initializable {
    public static User CurrentUser;
     public static String pseudo;
     CrudUser crudutilisateur = new CrudUser();
+     public static List<ArrayList> panier;
+    public static int nb_produits_panier; 
 
     /**
      * Initializes the controller class.
@@ -96,6 +100,8 @@ public class LoginController implements Initializable {
             String pass = tfpass.getText();
             CrudUser crudutilisateur = new CrudUser();
             User u = crudutilisateur.Authentification(email, pass);
+             panier=new ArrayList<>();
+         nb_produits_panier= panier.size();
                             System.out.println("user n'est pas null *****"+u);
 
             if (u == null) {
@@ -107,6 +113,7 @@ public class LoginController implements Initializable {
 
             }else {
                 CurrentUser = u;
+                
                 if(!u.getRoles().equals("Parent")){
                 System.out.println("parent");
                 
