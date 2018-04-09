@@ -97,6 +97,31 @@ public class CrudCommande {
            
        }
        
+        public List<ligne_commandes> Liste_LigneCommandes_IDCommande(int id_commande) {
+        List<ligne_commandes>tabE = new ArrayList<>();
+      try
+      {
+          String sql = "select * from ligne_commandes where idCommande = "+id_commande+" ";
+          Statement stm = con.createStatement();
+          ResultSet s = stm.executeQuery(sql);
+          while(s.next())
+          {
+              ligne_commandes lc=new ligne_commandes();
+              lc.setId_commande(s.getInt("idCommande"));
+              lc.setId_produit(s.getInt("idProduit"));
+              lc.setPrix_commande(s.getFloat("PrixTotal"));
+              lc.setQuantite(s.getInt("nbrArticle"));
+              tabE.add(lc);
+          }
+          System.out.println("patientiez en cours d'affichage");
+      }
+      catch(SQLException add)
+      {
+          System.out.println("probleme d'affichage ");
+      }
+      //System.out.println(tabE.toString());
+      return tabE;
+    }
        
        
     

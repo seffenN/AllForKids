@@ -35,8 +35,8 @@ public class QuantiteController implements Initializable {
     private Button AjouterArtcile;
     Produits p;
     @FXML
-    private Label id;
-
+    private TextField id;
+    public static int idProd;
     public static int qt;
     CrudStore prodService=new CrudStore();
     @FXML
@@ -82,10 +82,13 @@ public class QuantiteController implements Initializable {
                 alert.showAndWait();
         }else{
         
-        id.setText(""+AfficheProdController.id);
-            System.out.println(AfficheProdController.id);
+            //idProd=Integer.parseInt(id.setText(""+AfficheProdController.id));
+            id.setText(""+AfficheProdController.id);
+            idProd= Integer.parseInt(id.getText());
         nbrArticle.setText(nbrArticle.getText());
         qt = Integer.parseInt(nbrArticle.getText());
+        System.out.println(AfficheProdController.id);
+            System.out.println(qt);
         //System.out.println(id.getText());
         
        ((Node)(event.getSource())).getScene().getWindow().hide();
@@ -101,13 +104,5 @@ public class QuantiteController implements Initializable {
         this.nbrArticle.setText(""+nbrArticle);
     }
 
-    public Label getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        
-        this.id.setText(""+id);
-    }
-    
+   
 }

@@ -25,6 +25,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -71,16 +72,17 @@ public class PanierController implements Initializable {
     @FXML
     private Button commander;
     List<Commande> lst_com;
+    List<ligne_commandes> lst_lc;
     CrudCommande serviceCommande = new CrudCommande();
     CrudStore servP = new CrudStore();
-    Produits p;
+    //Produits p;
     private TextField nbrArtcile;
-    AfficheProdController qc = new AfficheProdController();
-            int id=AfficheProdController.id;
+    int quant=0;
     @FXML
     private Label totalPrix;
-    @FXML
-    private Button btn;
+   // @FXML
+    //private Button btn;
+    public float prixtotas = 0;
 
     /**
      * Initializes the controller class.
@@ -89,18 +91,26 @@ public class PanierController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         //ObservableMap<Produits,Integer> prod;
         List<Produits> lst_P = new ArrayList<>();
-        for (int i = 0; i <LoginController.panier.size(); i++) {
-            lst_P.add(servP.findById((Integer) LoginController.panier.get(i).get(0)));
-        }
-        ObservableList observableList = FXCollections.observableArrayList(lst_P);
+      
+       
+        
+       for (int i = 0; i < LoginController.panier.size(); i++) {
+           lst_P.add(servP.findById((Integer)LoginController.panier.get(i).get(0)));
+       }
+         
+           
+    
+        
+      
+      
+      ObservableList observableList = FXCollections.observableArrayList(lst_P);
         table.setItems(observableList);
         //id.setCellValueFactory(new PropertyValueFactory<>("id"));
         nomprod.setCellValueFactory(new PropertyValueFactory<>("Nom"));
         prix.setCellValueFactory(new PropertyValueFactory<>("Prix"));
-      //  quantite.setCellValueFactory(new PropertyValueFactory<>("Quantite"));
+        //  quantite.setCellValueFactory(new PropertyValueFactory<>("Quantite"));
 
-       // quantite.setEditable(true);
-
+        // quantite.setEditable(true);
         // image.setCellValueFactory(new PropertyValueFactory<>("image"));
         //Dispo.setCellValueFactory(new PropertyValueFactory<>("Disponible"));
         type.setCellValueFactory(new PropertyValueFactory<>("Categorie"));
@@ -123,52 +133,72 @@ public class PanierController implements Initializable {
         cmd.setDateCommande(date_format.parse(date_format.format(date)));
         serviceCommande.AjouterCommande(cmd);
         lst_com.add(cmd);
-        for (int i = 0; i < table.getItems().size(); i++) // if (table.getSelectionModel().getSelectedItem()!=null)
+            
+        for (int i = 0; i <LoginController.panier.size(); i++) // if (table.getSelectionModel().getSelectedItem()!=null)
         {
+          //quant=QuantiteController.qt;
             Commande c = serviceCommande.ConsulterListe_Commandes();
             lc.setId_commande(c.getIdCommande());
-            System.out.println(cmd.getIdCommande());
-       
-            p = table.getItems().get(i);
+            //System.out.println(cmd.getIdCommande());
+           
+           Produits p = servP.findById((Integer)LoginController.panier.get(i).get(0));
             //int quantite = p.getQuantite();
-            QuantiteController qc = new QuantiteController();
-            
-            System.out.println(id);
-            serviceCommande.DecrementerStock(p.getId(),qc.qt);
+            //QuantiteController qc = new QuantiteController();
+            //  System.out.println(QuantiteController.qt);
+           System.out.println(p.getId());
+           int qt=(int)LoginController.panier.get(i).get(1);
+           float prixC=p.getPrix()*qt;
+            serviceCommande.DecrementerStock(p.getId(),qt);
             lc.setId_produit(p.getId());
-            lc.setPrix_commande(p.getPrix());
-            lc.setQuantite(qc.qt);
+            lc.setPrix_commande(prixC);
+            System.out.println(LoginController.panier.get(i).get(1).toString());
+            lc.setQuantite(Integer.parseInt(LoginController.panier.get(i).get(1).toString()));
             serviceCommande.AjouterLigne_Commande(lc);
-            // }
-
+            lst_lc=serviceCommande.Liste_LigneCommandes_IDCommande(c.getIdCommande());
         }
+
+         for (ligne_commandes lst_lc1 : lst_lc) {
+                 prixtotas=prixtotas+lst_lc1.getPrix_commande();
+                System.out.println(prixtotas);
+            totalPrix.setText(""+prixtotas);
+            }
+
+        
     }
 
     @FXML
     private void suprrimerDuPanier(ActionEvent event) {
-         if (table.getSelectionModel().getSelectedItem()!=null){
-             int indice_prod=table.getSelectionModel().getSelectedIndex();
-             p = table.getItems().get(table.getSelectionModel().getSelectedIndex());
-               Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        if (table.getSelectionModel().getSelectedItem() != null) {
+            int indice_prod = table.getSelectionModel().getSelectedIndex();
+           Produits p = table.getItems().get(table.getSelectionModel().getSelectedIndex());
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation suppression");
             alert.setHeaderText("Confirmer ");
             alert.setContentText("Vous-etes sur de supprimer le produit " + p.getNom() + " ?");
-             Optional<ButtonType> result = alert.showAndWait();
+            Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 LoginController.panier.remove(indice_prod);
                 List<Produits> lst_P = new ArrayList<>();
-        for (int i = 0; i <LoginController.panier.size(); i++) {
-            lst_P.add(servP.findById((Integer) LoginController.panier.get(i).get(0)));
+                for (int i = 0; i < LoginController.panier.size(); i++) {
+                    lst_P.add(servP.findById((Integer) LoginController.panier.get(i).get(0)));
+                }
+                ObservableList observableList = FXCollections.observableArrayList(lst_P);
+                table.setItems(observableList);
+                nomprod.setCellValueFactory(new PropertyValueFactory<>("Nom"));
+                prix.setCellValueFactory(new PropertyValueFactory<>("Prix"));
+                type.setCellValueFactory(new PropertyValueFactory<>("Categorie"));
+            }
         }
-        ObservableList observableList = FXCollections.observableArrayList(lst_P);
-        table.setItems(observableList);
-        nomprod.setCellValueFactory(new PropertyValueFactory<>("Nom"));
-        prix.setCellValueFactory(new PropertyValueFactory<>("Prix"));
-        type.setCellValueFactory(new PropertyValueFactory<>("Categorie"));
-            }
-            }
-         }
-    
+    }
+
+    /* public float CalculerPrix_Total(List<ArrayList> lst) {
+        float prixTotale = 0;
+        for (int i = 0; i < lst.size(); i++) {
+           Produits pr=servP.findById((Integer) lst.get(i).get(0));
+           
+        }
+        return prixTotale;
+    }*/
 }
 
 // System.out.println(panier.listIterator());

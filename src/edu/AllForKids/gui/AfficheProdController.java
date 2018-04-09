@@ -16,8 +16,12 @@ import static java.lang.Math.E;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -35,6 +39,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
@@ -60,19 +65,13 @@ public class AfficheProdController implements Initializable {
 
     CrudStore prodService = new CrudStore();
     List<Produits> arrayList;
-    @FXML
-    private TextField Titre;
-    @FXML
-    private Button ChercherTitre;
-    @FXML
-    private CheckBox Cultiver;
-    @FXML
-    private CheckBox Distraire;
+
     @FXML
     private ScrollPane LisTProd;
+    // public static Map<Produits,Integer> paniers;
     //int nbProdPanier=0;
     // public static int nbrArtcile;
-    public static int id = 0;
+    public static int id;
     public static int stock;
     // public static Produits p;
     // Produits p=null;
@@ -85,6 +84,8 @@ public class AfficheProdController implements Initializable {
     private ImageView cadd;
     @FXML
     private Button bttVoir;
+    @FXML
+    private TextField cat;
 
     /**
      * Initializes the controller class.
@@ -157,35 +158,57 @@ public class AfficheProdController implements Initializable {
                 button.setTextFill(Color.web("#FBFCFC"));
                 // button.setAccessibleText("" + E.getId_even());
                 button.onActionProperty().set((event) -> {
-                    try {
-                        if(p.getQuantite()<1){
-                             Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erreur ");
-                alert.setHeaderText("Attention");
-                alert.setContentText("Rupture du stock!");
-                alert.showAndWait();
-                        }else{
-                        ArrayList<Object> nb_pdt = new ArrayList<>();
-                        nb_pdt.add(p.getId());
-                        System.out.println(nb_pdt);
-                        // nb_pdt.add(1, 1);
-                        System.out.println(nb_pdt);
+
+                    // try {
+                    if (p.getQuantite() < 1) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Erreur ");
+                        alert.setHeaderText("Attention");
+                        alert.setContentText("Rupture du stock!");
+                        alert.showAndWait();
+                    } else {
+                          List<Integer> lst_qte = new ArrayList<>();
+                        for (int j = 0; j < p.getQuantite(); j++) {
+                            lst_qte.add(j + 1);
+                        }
+                        ChoiceDialog<Integer> dialog = new ChoiceDialog<>(1, lst_qte);
+                        dialog.setTitle("Choice Dialog");
+                        dialog.setHeaderText("Look, a Choice Dialog");
+                        dialog.setContentText("Choisissez nbre de produit:");
+                         Optional<Integer> result = dialog.showAndWait();
+                         if(result.isPresent()){
+                             int qte=result.get();
+                             System.out.println(qte);
+                              ArrayList<Object> nb_pdt = new ArrayList<>();
+                        nb_pdt.add(0,p.getId());
+                        nb_pdt.add(1, qte);
+                       // System.out.println(nb_pdt);
+                        //nb_pdt.add(1, 1);
+                       // System.out.println(nb_pdt);
                         LoginController.panier.add(nb_pdt);
                         LoginController.nb_produits_panier = nb_produits_panier + 1;
                         nbpanier.setText("" + nb_produits_panier);
                         id = p.getId();
-                        Stage stage = new Stage();
-                        Parent roots = FXMLLoader.load(getClass().getResource("Quantite.fxml"));
+                             
+                         }
+                        // try {
+                       
+                       
+                        // Stage stage = new Stage
 
-                        Scene scene = new Scene(roots);
-                        stage.setScene(scene);
-                        stage.show();
-                        bttVoir.setVisible(true);
-                        }
-
-                    } catch (IOException ex) {
-                        Logger.getLogger(AfficheProdController.class.getName()).log(Level.SEVERE, null, ex);
+                        /* Parent roots = FXMLLoader.load(getClass().getResource("Quantite.fxml"));
+                               Scene scene = new Scene(roots);
+                               stage.setScene(scene);
+                               stage.show();
+                          /* } catch (IOException ex) {
+                               Logger.getLogger(AfficheProdController.class.getName()).log(Level.SEVERE, null, ex);
+                           }*/
                     }
+
+                    bttVoir.setVisible(true);
+                    /* } catch (IOException ex) {
+                        Logger.getLogger(AfficheProdController.class.getName()).log(Level.SEVERE, null, ex);
+                    }*/
 
                 });
 
@@ -218,11 +241,12 @@ public class AfficheProdController implements Initializable {
     }
 
     @FXML
-    private void Chercher(ActionEvent event) {
+    private void consulterPanier(MouseEvent event) {
     }
 
     @FXML
-    private void consulterPanier(MouseEvent event) {
+    private void Search(ActionEvent event) {
+
     }
 
 }

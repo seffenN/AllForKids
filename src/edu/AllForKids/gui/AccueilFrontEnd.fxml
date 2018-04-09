@@ -70,7 +70,7 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="BtnStore" mnemonicParsing="false" onAction="#GetStore" prefHeight="80.0" prefWidth="250.0" style="-fx-background-color: #FFFF;" text="Store" textFill="#2471a3">
+                  <Button fx:id="BtnStore" mnemonicParsing="false" onAction="#GetStore" prefHeight="80.0" prefWidth="250.0" style="-fx-background-color: #FFFF;" text="Boutique" textFill="#2471a3">
                      <font>
                         <Font size="14.0" />
                      </font>

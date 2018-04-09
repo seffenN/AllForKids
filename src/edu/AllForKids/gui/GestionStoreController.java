@@ -120,8 +120,6 @@ public class GestionStoreController implements Initializable {
     @FXML
     private TableColumn<Produits, Float> Prix;
     @FXML
-    private TableColumn<Produits, String> image;
-    @FXML
     private TableColumn<Produits, Integer> Quantite;
     @FXML
     private TableColumn<Produits, Boolean> Dispo;
@@ -133,8 +131,6 @@ public class GestionStoreController implements Initializable {
     @FXML
     private TableColumn<Produits, String> cat;
 
-    @FXML
-    private TableColumn<Produits, Integer> id;
     @FXML
     private Button modifierprod;
     @FXML
@@ -151,6 +147,8 @@ public class GestionStoreController implements Initializable {
     File file1;
     File source;
     File dest;
+    @FXML
+    private TextField fileImage;
 
     /**
      * Initializes the controller class.
@@ -272,20 +270,7 @@ public class GestionStoreController implements Initializable {
                 Image i = new Image(file.toURI().toString());
                 imageprod.setImage(i);
 
-            }else if (file.getName().contains(".png")){
-                System.out.println(UUID.randomUUID().toString().concat(".png"));
-                String uuid = UUID.randomUUID().toString().concat(".png");
-                path1 = file.getAbsolutePath();
-                System.out.println(path1);
-                file1 = new File(path1);
-                source = new File(path1);
-                dest = new File("C:\\wamp64\\www\\PI4\\web\\bundles\\images\\" + uuid);
-                path1 = uuid;
-                Image i = new Image(file.toURI().toString());
-                imageprod.setImage(i);
-                
             }
-
         }
     }
 
@@ -421,6 +406,7 @@ public class GestionStoreController implements Initializable {
         txtquantite.setText("" + p.getQuantite());
         txtdisponible.setText("" + p.isDisponible());
         txtcategorie.setValue(p.getCategorie());
+        fileImage.setText(p.getImage());
         File file = new File("C:\\wamp64\\www\\PI4\\web\\bundles\\images\\" + p.getImage());
 
         Image i = new Image(file.toURI().toString());

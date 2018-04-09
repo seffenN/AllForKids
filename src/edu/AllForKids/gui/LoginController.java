@@ -101,7 +101,7 @@ public class LoginController implements Initializable {
             CrudUser crudutilisateur = new CrudUser();
             User u = crudutilisateur.Authentification(email, pass);
              panier=new ArrayList<>();
-         nb_produits_panier= panier.size();
+        nb_produits_panier= panier.size();
                             System.out.println("user n'est pas null *****"+u);
 
             if (u == null) {
