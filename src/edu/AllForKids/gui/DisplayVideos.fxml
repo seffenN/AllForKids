@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="Parent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.AllForKids.gui.DisplayVideosController">
+   <children>
+      <ImageView fx:id="imagebackground" fitHeight="590.0" fitWidth="984.0" layoutX="-8.0" opacity="0.76" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/b834e55141ad7aeca6ad79f7c1400c55.jpg" />
+         </image>
+      </ImageView>
+      <VBox fx:id="vbox" layoutX="78.0" layoutY="91.0" onTouchReleased="#getListQuiz" prefHeight="497.0" prefWidth="814.0" spacing="50.0" />
+      <Label fx:id="labtheme" layoutX="455.0" layoutY="47.0" text="Théme" />
+      <ComboBox fx:id="thecombo" layoutX="523.0" layoutY="42.0" onAction="#getListQuiz" prefHeight="30.0" prefWidth="211.0" promptText="Sélectionner un théme" />
+   </children>
+</AnchorPane>

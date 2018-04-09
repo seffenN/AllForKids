@@ -85,78 +85,82 @@ public class LoginController implements Initializable {
 
             if (tfmail.getText().equals("")) {
                 tfmail.setStyle("-fx-border-color : red ; -fx-border-width :  0 0 2px 0 ; -fx-background-color :  transparent ; -fx-text-fill : white ");
-            Alert b = new Alert(Alert.AlertType.WARNING);
-            a.setContentText("Veuillez inserer votre email ");
-            a.showAndWait();
+                Alert b = new Alert(Alert.AlertType.WARNING);
+                a.setContentText("Veuillez inserer votre email ");
+                a.showAndWait();
             }
             if (tfpass.getText().equals("")) {
                 tfpass.setStyle("-fx-border-color : red ; -fx-border-width :  0 0 2px 0 ; -fx-background-color :  transparent ; -fx-text-fill : white ");
-            Alert c = new Alert(Alert.AlertType.WARNING);
-            a.setContentText("Veuillez inserer  et votre mot de pass");
-            a.showAndWait();
+                Alert c = new Alert(Alert.AlertType.WARNING);
+                a.setContentText("Veuillez inserer  et votre mot de pass");
+                a.showAndWait();
             }
         } else {
             String email = tfmail.getText();
             String pass = tfpass.getText();
             CrudUser crudutilisateur = new CrudUser();
             User u = crudutilisateur.Authentification(email, pass);
-             panier=new ArrayList<>();
+            panier=new ArrayList<>();
         nb_produits_panier= panier.size();
-                            System.out.println("user n'est pas null *****"+u);
+            CurrentUser=u;
+            System.out.println("user n'est pas null *****" + u);
 
-            if (u == null) {
+            if (CurrentUser == null) {
                 System.out.println("iln'yapas dns base");
                 Alert a = new Alert(Alert.AlertType.WARNING);
                 a.setContentText("Email ou mot de passe incorrect");
                 a.showAndWait();
                 System.out.println("mailfaut");
 
-            }else {
-                CurrentUser = u;
-                
-                if(!u.getRoles().equals("Parent")){
-                System.out.println("parent");
-                
-               
-             ((Node)event.getSource()).getScene().getWindow().hide();
-            Stage stage=new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("AccueilFrontEnd.fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show(); 
-                }
-            
-         
-                else if (!u.getRoles().equals("Admin")){
-                 
-        ((Node)event.getSource()).getScene().getWindow().hide();
-            Stage stage=new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("AccueilFrontEnd.fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show(); 
-                }
-                else if (!u.getRoles().equals("Pediatre")){
-                                        System.out.println("    ped");
-((Node)event.getSource()).getScene().getWindow().hide();
-            Stage stage=new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("AccueilBackEnd.fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show(); 
+            } else if (u.getEnabled()==1){
+                            System.out.println("curr us *****" + CurrentUser);
+
+                //System.out.println("enabled 1");
+              // CurrentUser=u ;
+                if (u.getRoles().equals("Parent")) {
+                    System.out.println("parent");
+
+                    ((Node) event.getSource()).getScene().getWindow().hide();
+                    Stage stage = new Stage();
+                    Parent root = FXMLLoader.load(getClass().getResource("AcceuilFrontEnd.fxml"));
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                } else if (u.getRoles().equals("Admin")) {
+                    System.out.println("    admin");
+
+                    ((Node) event.getSource()).getScene().getWindow().hide();
+                    Stage stage = new Stage();
+                    Parent root = FXMLLoader.load(getClass().getResource("AccueilBackEnd.fxml"));
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                } else if (u.getRoles().equals("Pediatre")) {
+                    System.out.println("    ped");
+                    ((Node) event.getSource()).getScene().getWindow().hide();
+                    Stage stage = new Stage();
+                    Parent root = FXMLLoader.load(getClass().getResource("AcceuilFrontEnd.fxml"));
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+
+                } else if (u.getRoles().equals("BabySitter")) {
+                                        System.out.println("   baby");
+
+                    ((Node) event.getSource()).getScene().getWindow().hide();
+                    Stage stage = new Stage();
+                    Parent root = FXMLLoader.load(getClass().getResource("AcceuilFrontEnd.fxml"));
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
 
                 }
-                else if (!u.getRoles().equals("BabySitter")){
-                ((Node)event.getSource()).getScene().getWindow().hide();
-            Stage stage=new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("AccueilBackEnd.fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show(); 
 
-                }
-
-                
+            }else{ 
+                System.out.println("desactivé");
+                Alert a = new Alert(Alert.AlertType.WARNING);
+                a.setContentText("Compte desactivé par admin");
+                a.showAndWait();
             }
         }
       

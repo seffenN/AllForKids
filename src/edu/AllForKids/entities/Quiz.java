@@ -5,6 +5,10 @@
  */
 package edu.AllForKids.entities;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author khaoula
@@ -19,8 +23,9 @@ public class Quiz {
     private String image;
     private int total;
     private int flag;
+   
 
-    public Quiz(String nom_quiz, String theme, String categorie_age, int time, String description, String image, int total, int flag) {
+    public Quiz(String nom_quiz, String theme, String categorie_age, int time, String description, String image, int total, int flag,Map<Question,ArrayList<Reponse>> map) {
         this.nom_quiz = nom_quiz;
         this.theme = theme;
         this.categorie_age = categorie_age;
@@ -29,6 +34,10 @@ public class Quiz {
         this.image = image;
         this.total = total;
         this.flag = flag;
+        map=new HashMap<>();
+    }
+
+    public Quiz() {
     }
 
     public int getId() {
@@ -81,6 +90,11 @@ public class Quiz {
 
     public String getImage() {
         return image;
+    }
+
+    @Override
+    public String toString() {
+        return "Quiz{" + "id=" + id + ", nom_quiz=" + nom_quiz + ", theme=" + theme + ", categorie_age=" + categorie_age + ", time=" + time + ", description=" + description + ", image=" + image + ", total=" + total + ", flag=" + flag + '}';
     }
 
     public void setImage(String image) {

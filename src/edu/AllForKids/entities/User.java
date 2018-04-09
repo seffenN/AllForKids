@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public class User {
 
-    private int id_user;
+   // private int id_user;
      private int id;
     private String username;
     private String username_canonical;
@@ -35,6 +35,14 @@ public class User {
     private int numTe;
 
     public User() {
+    }
+    public User(int id,String username){
+        this.id=id;
+        this.username=username;
+        
+    }
+    public User(int id){
+        this.id=id;
     }
 
     public User(String username, String email, String password, String roles, int Age, String Sexe, String adresse) {

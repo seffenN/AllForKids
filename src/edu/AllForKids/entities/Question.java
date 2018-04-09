@@ -15,10 +15,24 @@ public class Question {
     private String libelle;
     private int flag;
 
-    public Question(int id_quiz_id, String libelle) {
+    public Question(String libelle) {
         this.id_quiz_id = id_quiz_id;
         this.libelle = libelle;
         this.flag = flag;
+    }
+
+    public Question(int id, String libelle) {
+        this.id = id;
+        this.libelle = libelle;
+    }
+    
+
+    @Override
+    public String toString() {
+        return "Question{" + "id=" + id + ", id_quiz_id=" + id_quiz_id + ", libelle=" + libelle + ", flag=" + flag + '}';
+    }
+
+    public Question() {
     }
 
     public int getId() {

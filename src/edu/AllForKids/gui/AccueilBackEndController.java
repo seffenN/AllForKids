@@ -52,7 +52,7 @@ public class AccueilBackEndController implements Initializable {
              //GestionUser = FXMLLoader.load(getClass().getResource(".fxml"));
            //  GestionStore = FXMLLoader.load(getClass().getResource(".fxml"));
              GestionStore =FXMLLoader.load(getClass().getResource("GestionStore.fxml"));
-            // GestionEspace = FXMLLoader.load(getClass().getResource(".fxml"));
+            GestionEspace = FXMLLoader.load(getClass().getResource("AjouterQuiz.fxml"));
             // GestionBabySitter = FXMLLoader.load(getClass().getResource(".fxml"));
             // GestionPediatre = FXMLLoader.load(getClass().getResource(".fxml"));
              // NomGestionnaire.setText("Gestionnaire des users");

@@ -65,12 +65,28 @@ public class Reponse {
         this.id = id;
     }
 
-    public Reponse(int id_quest_id, String libelle, int verif, int point, int flag) {
-        this.id_quest_id = id_quest_id;
+    public Reponse(String libelle, int verif, int point, int flag) {
+       
         this.libelle = libelle;
         this.verif = verif;
         this.point = point;
         this.flag = flag;
+    }
+
+    public Reponse(int id_quest_id, String libelle, int verif, int point) {
+        this.id_quest_id = id_quest_id;
+        this.libelle = libelle;
+        this.verif = verif;
+        this.point = point;
+    }
+    
+
+    @Override
+    public String toString() {
+        return "Reponse{" + "id=" + id + ", id_quest_id=" + id_quest_id + ", libelle=" + libelle + ", verif=" + verif + ", point=" + point + ", flag=" + flag + '}';
+    }
+
+    public Reponse() {
     }
     
     

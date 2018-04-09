@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entity;
+package edu.AllForKids.entities;
 
 /**
  *
@@ -11,18 +11,32 @@ package Entity;
  */
 public class Rdv {
     
-    int id;
+     int id;
     String date;
-    String heure;
     int idEnfant;
     int idPediatre;
+    int idVaccin;
 
-    public Rdv(int id, String date, String heure, String pediatre, int idPediatre, int idEnfant) {
+    public Rdv() {
+    }
+
+    public Rdv(int id, String date, int idEnfant, int idPediatre, int idVaccin) {
         this.id = id;
         this.date = date;
-        this.heure = heure;
         this.idEnfant = idEnfant;
         this.idPediatre = idPediatre;
+        this.idVaccin = idVaccin;
+    }
+    
+    
+
+    public Rdv(int id, String date, String pediatre, int idPediatre, int idEnfant) {
+        this.id = id;
+        this.date = date;
+        
+        this.idEnfant = idEnfant;
+        this.idPediatre = idPediatre;
+        
     }
 
     public int getId() {
@@ -41,13 +55,9 @@ public class Rdv {
         this.date = date;
     }
 
-    public String getHeure() {
-        return heure;
-    }
+   
 
-    public void setHeure(String heure) {
-        this.heure = heure;
-    }
+   
 
     public int getIdEnfant() {
         return idEnfant;
@@ -64,10 +74,19 @@ public class Rdv {
     public void setIdPediatre(int idPediatre) {
         this.idPediatre = idPediatre;
     }
+
+    public int getIdVaccin() {
+        return idVaccin;
+    }
+
+    public void setIdVaccin(int idVaccin) {
+        this.idVaccin = idVaccin;
+    }
+    
     
     @Override
     public String toString() {
-        return "Rendez vous{" + "date=" + date + ", heure=" + heure +  ", idPediatre=" + idPediatre + ",idEnfant=" + idEnfant + '}';
+        return "Rendez vous{" + "date=" + date +   ", idPediatre=" + idPediatre + ",idEnfant=" + idEnfant + '}';
     }
     
 }

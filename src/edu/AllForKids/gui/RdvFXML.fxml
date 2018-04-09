@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTimePicker?>
+<?import java.net.URL?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.AllForKids.gui.RdvFXMLController">
+    <stylesheets>
+        <URL value="@/edu/AllForKids/StyleSheet/StyleSheet.css" />
+    </stylesheets>
+    <children>
+        <AnchorPane layoutX="-1.0" prefHeight="580.0" prefWidth="144.0" styleClass="vbox" stylesheets="@../StyleSheet/StyleSheet.css">
+         <children>
+            <JFXDrawer fx:id="drawer" layoutY="100.0" prefHeight="480.0" prefWidth="144.0" />
+         </children></AnchorPane>
+      <AnchorPane layoutX="-2.0" layoutY="580.0" prefHeight="82.0" prefWidth="816.0" styleClass="vbox" stylesheets="@../StyleSheet/StyleSheet.css">
+         <children>
+            <JFXButton fx:id="bt_reserver" buttonType="RAISED" layoutX="346.0" layoutY="14.0" onAction="#addRdv" prefHeight="39.0" prefWidth="125.0" styleClass="jfxbuttonre" stylesheets="@../StyleSheet/StyleSheet.css" text="Reserver" />
+         </children></AnchorPane>
+      <JFXHamburger fx:id="hamburger" layoutX="759.0" layoutY="112.0" stylesheets="@../StyleSheet/StyleSheet.css">
+         <effect>
+            <Reflection />
+         </effect>
+      </JFXHamburger>
+      <TableView fx:id="table_pediatre" layoutX="169.0" layoutY="282.0" prefHeight="178.0" prefWidth="442.0" style="-fx-background-color: White;">
+        <columns>
+          <TableColumn fx:id="c_nom" prefWidth="112.0" text="Nom" />
+            <TableColumn fx:id="c_ville" prefWidth="111.0" text="Ville" />
+          <TableColumn fx:id="c_adresse" prefWidth="216.0" text="Adresse" />
+        </columns>
+         <columnResizePolicy>
+            
+         </columnResizePolicy>
+      </TableView>
+      <JFXComboBox fx:id="c_enfantlist" layoutX="329.0" layoutY="122.0" prefHeight="25.0" prefWidth="155.0" promptText="Veuillez choisir un enfant" unFocusColor="#4ff9fc">
+         <effect>
+            <Blend />
+         </effect>
+      </JFXComboBox>
+      <Label fx:id="lb_pediatre" layoutX="169.0" layoutY="215.0" prefHeight="39.0" prefWidth="225.0" text="Veuillez selectionner un Pediatre:" textFill="#34c2e5">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <DatePicker fx:id="date_rdv" layoutX="211.0" layoutY="492.0" prefHeight="39.0" prefWidth="283.0" promptText="veuillez choisir date de rendez vous" AnchorPane.bottomAnchor="131.0" AnchorPane.leftAnchor="211.0" AnchorPane.rightAnchor="320.0" AnchorPane.topAnchor="492.0" />
+      <JFXComboBox fx:id="c_vaccinlist" layoutX="329.0" layoutY="169.0" prefHeight="25.0" prefWidth="155.0" promptText="Veuillez choisir un vaccin" unFocusColor="#4ff9fc">
+         <effect>
+            <Blend />
+         </effect>
+      </JFXComboBox>
+      <JFXTimePicker fx:id="tp_picker" layoutX="534.0" layoutY="498.0" />
+      <JFXTextField fx:id="c_recherche" focusColor="#7396ff" layoutX="638.0" layoutY="282.0" prefHeight="27.0" prefWidth="136.0" promptText="Rechercher" unFocusColor="#4ff9fc">
+         <font>
+            <Font name="Bodoni MT Italic" size="13.0" />
+         </font>
+      </JFXTextField>
+      <HBox prefHeight="100.0" prefWidth="814.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #2471A3;">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="368.0" spacing="7.0" style="-fx-background-color: #52B3D9;" HBox.hgrow="NEVER">
+                     <children>
+                        <Pane prefHeight="100.0" prefWidth="4.0" />
+                        <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="284.0" style="-fx-background-color: #52B3D9;">
+                           <children>
+                              <ImageView fitHeight="46.0" fitWidth="263.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../../Downloads/AllForKids3/AllForKids/src/edu/AllForKids/images/logo.png" />
+                                 </image>
+                              </ImageView>
+                              <Separator prefWidth="200.0" />
+                              <Label prefHeight="21.0" prefWidth="236.0" text="&quot;tous les necessités de votre enfants sont à vos disposition&quot;" textFill="WHITE" wrapText="true" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <Pane prefHeight="100.0" prefWidth="238.0" style="-fx-background-color: #52B3D9;" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="205.0" spacing="7.0" style="-fx-background-color: #52B3D9;" HBox.hgrow="ALWAYS">
+               <children>
+                  <VBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="149.0" style="-fx-background-color: #52B3D9;">
+                     <children>
+                        <Label fx:id="UserName" text="User Name" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Separator prefHeight="2.0" prefWidth="116.0" />
+                        <Label onMouseClicked="#ProfileEdit" text="Modifier le profil" textFill="WHITE" underline="true" />
+                        <Label onMouseClicked="#Lougout" text="Deconnexion" textFill="WHITE" underline="true" />
+                     </children>
+                  </VBox>
+                  <ImageView fx:id="UserImage" fitHeight="61.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../Downloads/AllForKids3/AllForKids/src/edu/AllForKids/View/images/Avatar.png" />
+                     </image>
+                  </ImageView>
+                  <Pane prefHeight="100.0" prefWidth="9.0" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+    </children>
+</AnchorPane>

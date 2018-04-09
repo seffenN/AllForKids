@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entity;
+package edu.AllForKids.entities;
 
 /**
  *
@@ -11,7 +11,7 @@ package Entity;
  */
 public class Vaccin {
     
-    int id;
+ int id;
     String nomVaccin;
     String age;
     String maladies;
@@ -71,6 +71,5 @@ public class Vaccin {
     public String toString() {
         return "Vaccin{" + "nom=" + nomVaccin + ", age=" + age + ", vaccin contre=" + maladies + ", description=" + description +  '}';
     }    
-    
     
 }

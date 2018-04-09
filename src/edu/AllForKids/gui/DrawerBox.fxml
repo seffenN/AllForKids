@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="144.0" style="-fx-background-color: white;" styleClass="vbox" stylesheets="@StyleSheet.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.AllForKids.gui.DrawerBoxController">
+     <children>
+      <ImageView fitHeight="89.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="file:/C:/Users/Narjes/Documents/NetBeansProjects/AllForkids/src/StyleSheetMarwen/All-for-kids-short-form-2176x1225-340x191.jpg" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="btn_acceuil" onAction="#menuAction" prefHeight="100.0" prefWidth="150.0" style="-fx-background-color: #57dbc8;" styleClass="jfxbutton" stylesheets="@StyleSheet.css" text="Acceuil" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" onAction="#vaccinAction" prefHeight="100.0" prefWidth="152.0" ripplerFill="#420aff" style="-fx-background-color: 00C0FF;" styleClass="jfxbuttonre" text="Vaccins" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></JFXButton>
+      <JFXButton onAction="#enfantAction" prefHeight="100.0" prefWidth="154.0" ripplerFill="#07f7f7c2" style="-fx-background-color: FF3DFF;" styleClass="jfxbutton" text="mes Enfants" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton onAction="#rendezAction" prefHeight="100.0" prefWidth="151.0" ripplerFill="#07f7f7" style="-fx-background-color: 40D0FF;" styleClass="jfxbutton" stylesheets="@StyleSheet.css" text="Rendez vous" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+   </children>
+</VBox>

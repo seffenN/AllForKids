@@ -1,0 +1,54 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jan 25, 2016, 6:06:14 PM
+    Author     : Abn
+*/
+
+.root {
+-fx-background: white ;
+}
+.tab {
+    
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color: radial-gradient(center 100% 100%, radius 100%, #d86e3a, #c54e2c);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+}
+.tab:pressed {
+    
+    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+}.tab:hover {
+     -fx-background-color: #9d4024;
+     -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+}
+
+.table-view {
+-fx-table-cell-border-color:derive(-fx-base,+10%);
+-fx-table-header-border-color:derive(-fx-base,+20%);
+}
+.jfx-hamburger
+{
+   
+}
+
+.vbox{
+-fx-background-color:#d3e1ec
+}
+.jfx-hamburger StackPane {
+	-fx-background-color: #33A8FF;
+}
+.button {
+ -fx-background-color: #c5d8bf ;  
+}
+.jfxbutton{
+	-fx-background-color: #33A8FF ;
+}
+.jfxbuttonre{
+	-fx-background-color: #A7DB26 ;
+}

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entity;
+package edu.AllForKids.entities;
 
 /**
  *
@@ -17,6 +17,10 @@ public class Enfant {
     String dateNaissance;
     int idParent;
 
+    public Enfant() {
+    }
+
+    
     public Enfant(int id, String nom, String prenom, String dateNaissance, int idParent) {
         this.id = id;
         this.nom = nom;

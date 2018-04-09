@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="505.0" prefWidth="762.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.AllForKids.gui.ConsultListQuizController">
+   <children>
+      <TableView fx:id="tablequiz" layoutX="63.0" layoutY="118.0" prefHeight="287.0" prefWidth="567.0">
+         <columns>
+            <TableColumn fx:id="idquiz" prefWidth="75.0" text="id" />
+            <TableColumn fx:id="nomquiz" prefWidth="75.0" text="nom " />
+            <TableColumn fx:id="themequiz" prefWidth="75.0" text="Théme" />
+            <TableColumn fx:id="categorieagequiz" prefWidth="75.0" text="Categorie d'age" />
+            <TableColumn fx:id="timequiz5" prefWidth="75.0" text="Timing" />
+         </columns>
+      </TableView>
+      <Label layoutX="108.0" layoutY="74.0" text="Recherche" />
+      <TextField fx:id="searchfield" layoutX="192.0" layoutY="69.0" prefHeight="30.0" prefWidth="442.0" promptText="Recherche" />
+   </children>
+</AnchorPane>

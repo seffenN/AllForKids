@@ -150,14 +150,16 @@ public class AccueilFrontEndController implements Initializable {
     }
 
     @FXML
-    private void GetEspace(ActionEvent event) {
-        setNode(GestionEspace);
+    private void GetEspace(ActionEvent event) throws IOException {
+       Pane newLoadedPane = FXMLLoader.load(getClass().getResource("DisplayListQuiz.fxml"));
+        ScrollPaneMain.getChildren().add(newLoadedPane);
 
     }
 
     @FXML
-    private void GetPediatre(ActionEvent event) {
-        setNode(GestionPediatre);
+    private void GetPediatre(ActionEvent event) throws IOException {
+         Pane newLoadedPane = FXMLLoader.load(getClass().getResource("EnfantFXML.fxml"));
+        ScrollPaneMain.getChildren().add(newLoadedPane);
 
     }
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="ParentAnchor" prefHeight="664.0" prefWidth="1072.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.AllForKids.gui.PlayQuizController">
+   <children>
+      <ImageView fx:id="Backimage" fitHeight="651.0" fitWidth="1062.0" layoutX="9.0" layoutY="9.0" opacity="0.79" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/b834e55141ad7aeca6ad79f7c1400c55.jpg" />
+         </image>
+      </ImageView>
+      <VBox fx:id="vbox" layoutX="325.0" layoutY="70.0" prefHeight="584.0" prefWidth="707.0" />
+      <Label fx:id="timer" layoutX="487.0" layoutY="23.0" prefHeight="31.0" prefWidth="142.0" textFill="#eb0707">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

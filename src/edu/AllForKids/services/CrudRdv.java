@@ -5,7 +5,8 @@
  */
 package edu.AllForKids.services;
 
-import Entity.Rdv;
+
+import edu.AllForKids.entities.Rdv;
 import edu.AllForKids.utils.MyConnexion;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -17,13 +18,12 @@ import java.sql.Statement;
  */
 public class CrudRdv {
     Connection connexion = MyConnexion.getInstance().getConnection();
-     // Ajout Rendez vous
-    public void ajouterVaccin(Rdv p) {
+     public void ajouterRdv(Rdv p) {
         try {
             System.out.println(p.toString());
                    
-            String query = "INSERT INTO `rdv`(`date`, `heure`, `idEnfant`, `idPediatre`) VALUES" +""
-                    + "( '"+p.getDate()+"','"+p.getHeure()+"',"+p.getIdEnfant()+",'"+p.getIdPediatre()+" )";
+            String query = "INSERT INTO `rdv`(`date`, `idenfant`, `idpediatre`,`vaccin_id`) VALUES" +""
+                    + "( '"+p.getDate()+"','"+p.getIdEnfant()+"','"+p.getIdPediatre()+"','"+p.getIdVaccin()+"')";
              Statement stm= connexion.createStatement();
             stm.executeUpdate(query);
             System.out.println("Ajout effectué");

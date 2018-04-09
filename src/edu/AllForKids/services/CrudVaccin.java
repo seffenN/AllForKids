@@ -5,11 +5,15 @@
  */
 package edu.AllForKids.services;
 
-import Entity.Vaccin;
+
+import edu.AllForKids.entities.Vaccin;
 import edu.AllForKids.utils.MyConnexion;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -18,24 +22,23 @@ import java.sql.Statement;
 public class CrudVaccin {
     
      Connection connexion = MyConnexion.getInstance().getConnection();
-    // Ajout Vaccin
-    public void ajouterVaccin(Vaccin p) {
+
+     public void ajouterVaccin(Vaccin p) {
         try {
             System.out.println(p.toString());
                    
             String query = "INSERT INTO `vaccin`(`nom`, `age`, `matricule`, `description`) VALUES" +""
-                    + "( '"+p.getNomVaccin()+"','"+p.getAge()+"',"+p.getMaladies()+",'"+p.getDescription()+" )";
+                    + "( '"+p.getNomVaccin()+"','"+p.getAge()+"','"+p.getMaladies()+"','"+p.getDescription()+"' )";
              Statement stm= connexion.createStatement();
             stm.executeUpdate(query);
             System.out.println("Ajout effectué");
         } catch (SQLException ex) {
             System.out.println("Echec d'ajout");
         }
-    }
     
-    
-    //Modification
-    public void modifierVaccin(Vaccin p) {
+   
+     }
+      public void modifierVaccin(Vaccin p) {
         try {
             System.out.println(p.toString());
                    
@@ -65,4 +68,41 @@ public class CrudVaccin {
         }
     }
     
+    public List<Vaccin> listofvaccins() {
+        try {
+            String query = "SELECT * FROM vaccin";
+            ArrayList Resultat = new ArrayList<Vaccin>();
+            Statement stm= connexion.createStatement();
+            ResultSet rs=stm.executeQuery(query);
+            while (rs.next())
+            {
+            Vaccin e=new Vaccin(rs.getInt("id"), rs.getString("nom"), rs.getString("age"), rs.getString("matricule"), rs.getString("description"));
+            Resultat.add(e);
+            }
+            System.out.println("operation effectuee");
+            return Resultat;
+        } catch (SQLException ex) {
+            System.out.println("Echec" +ex.getMessage());
+            return null;
+        } 
+    }
+       public List<Vaccin> listofvaccinsbyage(int ag) {
+        try {
+            String query = "SELECT * FROM `vaccin`"+ "WHERE `age` < "+ag+"";
+            System.out.println("SQL     "+query);
+            ArrayList Resultat = new ArrayList<Vaccin>();
+            Statement stm= connexion.createStatement();
+            ResultSet rs=stm.executeQuery(query);
+            while (rs.next())
+            {
+            Vaccin e=new Vaccin(rs.getInt("id"), rs.getString("nom"), rs.getString("age"), rs.getString("matricule"), rs.getString("description"));
+            Resultat.add(e);
+            }
+            System.out.println("operation effectuee");
+            return Resultat;
+        } catch (SQLException ex) {
+            System.out.println("Echec"+ex.getMessage());
+            return null;
+        } 
+    }
 }
